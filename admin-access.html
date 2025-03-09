@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Access - Bengkel Aseng Ketok</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="admin.js"></script>
+    <script src="admin-login.js"></script>
+    <style>
+        .admin-access-container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            text-align: center;
+        }
+        
+        .admin-access-title {
+            color: var(--color-primary);
+            margin-bottom: 30px;
+        }
+        
+        .admin-access-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--color-primary);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .admin-access-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .admin-info {
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-access-container">
+        <h1 class="admin-access-title">Admin Dashboard Access</h1>
+        <p>Halaman ini hanya untuk administrator Bengkel Aseng Ketok.</p>
+        <a href="admin.html" class="admin-access-button">Masuk ke Dashboard Admin</a>
+        <div class="admin-info">
+            <p>Anda harus login dengan kredensial admin yang valid untuk mengakses dashboard.</p>
+            <p>Jika Anda bukan administrator, silakan kembali ke <a href="index.html">halaman utama</a>.</p>
+        </div>
+    </div>
+
+    <script>
+        // Redirect to admin page if already logged in as admin
+        document.addEventListener('DOMContentLoaded', function() {
+            if (isAdminLoggedIn()) {
+                window.location.href = 'admin.html';
+            }
+        });
+    </script>
+</body>
+</html> 
