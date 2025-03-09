@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Bengkel Aseng Ketok</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="auth.js"></script>
+    <script src="admin.js"></script>
+    <style>
+        .admin-section {
+            padding: 8rem 0;
+            background-color: #f7f9fc;
+            min-height: calc(100vh - 300px);
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .admin-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .btn-admin-logout {
+            padding: 1rem 2rem;
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-admin-logout:hover {
+            background-color: #dc2626;
+        }
+
+        .users-table {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .users-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .users-table th,
+        .users-table td {
+            padding: 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .users-table th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .users-table tr:hover {
+            background-color: #f7f9fc;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-edit {
+            padding: 0.5rem 1rem;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 0.5rem;
+        }
+
+        .btn-edit:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-edit i {
+            margin-right: 0.5rem;
+        }
+
+        .btn-edit-balance {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .btn-edit-balance:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-edit-points {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .btn-edit-points:hover {
+            background-color: #059669;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Add z-index for specific modals */
+        #editBalanceModal, #editPointsModal, #addPointsModal, #addServiceModal {
+            z-index: 1100; /* Higher z-index to appear on top of user details modal */
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #9ca3af;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #ef4444;
+        }
+
+        .modal-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 2rem;
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-input {
+            padding: 1.2rem 1.5rem;
+            font-size: 1.6rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .modal-input:focus {
+            border-color: var(--color-primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .modal-btn {
+            padding: 1.2rem;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn:hover {
+            background-color: #4f46e5;
+        }
+
+        /* Add these new styles */
+        .user-details-modal {
+            max-width: 800px !important;
+        }
+
+        .user-details-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 1rem;
+        }
+
+        .tab-button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            background: none;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #718096;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            color: var(--color-primary);
+            border-bottom: 2px solid var(--color-primary);
+            margin-bottom: -1rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .history-item {
+            padding: 1.5rem;
+            border-radius: 8px;
+            background-color: #f8fafc;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--color-primary);
+        }
+
+        .history-date {
+            font-size: 1.2rem;
+            color: #718096;
+            margin-bottom: 0.5rem;
+        }
+
+        .history-details {
+            font-size: 1.4rem;
+            color: #2d3748;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-align: center;
+            min-width: 10rem;
+        }
+
+        .status-success {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .status-pending {
+            background-color: #fef9c3;
+            color: #854d0e;
+        }
+
+        .status-cancelled {
+            background-color: #f3f4f6;
+            color: #4b5563;
+        }
+
+        .status-failed {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .status-unknown {
+            background-color: #e5e7eb;
+            color: #6b7280;
+        }
+
+        /* New styles for enhanced admin panel */
+        .admin-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 1rem;
+        }
+
+        .admin-tab-button {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #718096;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .admin-tab-button:hover {
+            color: var(--color-primary);
+        }
+
+        .admin-tab-button.active {
+            color: var(--color-primary);
+            border-bottom: 3px solid var(--color-primary);
+            margin-bottom: -1.5rem;
+        }
+
+        .admin-tab-content {
+            display: none;
+        }
+
+        .admin-tab-content.active {
+            display: block;
+        }
+
+        .search-filter-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            font-size: 1.6rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+        }
+
+        .filter-select {
+            padding: 1rem 1.5rem;
+            font-size: 1.6rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background-color: white;
+        }
+
+        .btn-refresh {
+            padding: 1rem 1.5rem;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-refresh:hover {
+            background-color: #2563eb;
+        }
+
+        .detailed-users-table,
+        .transactions-table {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            margin-bottom: 3rem;
+        }
+
+        .detailed-users-table table,
+        .transactions-table table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1000px;
+        }
+
+        .detailed-users-table th,
+        .detailed-users-table td,
+        .transactions-table th,
+        .transactions-table td {
+            padding: 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            white-space: nowrap;
+        }
+
+        .detailed-users-table th,
+        .transactions-table th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: #4a5568;
+            position: sticky;
+            top: 0;
+        }
+
+        .detailed-users-table tr:hover,
+        .transactions-table tr:hover {
+            background-color: #f7f9fc;
+        }
+
+        .user-id {
+            font-family: monospace;
+            font-weight: 600;
+            color: #3b82f6;
+        }
+
+        .transaction-id {
+            font-family: monospace;
+            font-size: 1.4rem;
+            color: #3b82f6;
+        }
+
+        .btn-view-details {
+            padding: 0.5rem 1rem;
+            background-color: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view-details:hover {
+            background-color: #4f46e5;
+        }
+
+        .btn-delete-user {
+            padding: 0.5rem 1rem;
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 0.5rem;
+        }
+
+        .btn-delete-user:hover {
+            background-color: #dc2626;
+        }
+
+        /* Inject Deposit Button */
+        .btn-inject-deposit {
+            padding: 0.8rem 1.2rem;
+            background-color: #10b981;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-inject-deposit:hover {
+            background-color: #059669;
+        }
+        
+        .btn-inject-deposit i {
+            font-size: 1.6rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .admin-tabs {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .admin-tab-button {
+                width: 100%;
+                text-align: left;
+                padding: 1rem;
+            }
+            
+            .search-filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        /* Dashboard stats */
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin: 1rem 0;
+        }
+
+        .stat-label {
+            font-size: 1.6rem;
+            color: #4b5563;
+            font-weight: 500;
+        }
+
+        .stat-icon {
+            font-size: 2.4rem;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #4b5563;
+        }
+        
+        .current-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            padding: 1rem;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .btn-add-service {
+            background-color: #6366F1;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-add-service:hover {
+            background-color: #4F46E5;
+        }
+        
+        .btn-add-points {
+            background-color: #10B981;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-right: 5px;
+        }
+        
+        .btn-add-points:hover {
+            background-color: #059669;
+        }
+        
+        .modal-textarea {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.6rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            resize: vertical;
+        }
+        
+        .modal-textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+        
+        .service-history-item {
+            padding: 1.5rem;
+            border-radius: 10px;
+            background-color: #f9fafb;
+            margin-bottom: 1rem;
+            border-left: 4px solid #6366F1;
+        }
+        
+        .service-date {
+            font-size: 1.3rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+        
+        .service-description {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+        
+        .service-price-points {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .service-price {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #FF6B35;
+        }
+        
+        .service-points {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #10B981;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-main">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="images/logo-removebg-preview.png.png" alt="Logo Bengkel" class="logo-img">
+                    <h1>Bengkel Aseng Ketok</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Section -->
+    <section class="admin-section">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h1 class="admin-title">Admin Dashboard</h1>
+                <button class="btn-admin-logout" onclick="adminLogout()">Keluar</button>
+            </div>
+
+            <!-- Add tabs for different admin views -->
+            <div class="admin-tabs">
+                <button class="admin-tab-button active" data-tab="users-summary">Ringkasan Pengguna</button>
+                <button class="admin-tab-button" data-tab="all-users">Semua Pengguna</button>
+                <button class="admin-tab-button" data-tab="transactions">Semua Transaksi</button>
+                <button class="admin-tab-button" data-tab="services">Servis</button>
+            </div>
+
+            <!-- Users Summary Tab (Original Table) -->
+            <div id="users-summary-tab" class="admin-tab-content active">
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-value" id="totalUsersCount">0</div>
+                        <div class="stat-label">Total Pengguna</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="stat-value" id="totalBalance">Rp 0</div>
+                        <div class="stat-label">Total Saldo</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-exchange-alt"></i></div>
+                        <div class="stat-value" id="totalTransactions">0</div>
+                        <div class="stat-label">Total Transaksi</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-star"></i></div>
+                        <div class="stat-value" id="totalPoints">0</div>
+                        <div class="stat-label">Total Poin</div>
+                    </div>
+                </div>
+                
+                <div class="users-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>No. Telepon</th>
+                                <th>Saldo</th>
+                                <th>Poin</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Users will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- All Users Tab (Detailed Information) -->
+            <div id="all-users-tab" class="admin-tab-content">
+                <div class="search-filter-container">
+                    <input type="text" id="userSearchInput" class="search-input" placeholder="Cari pengguna...">
+                    <button class="btn-refresh" onclick="loadAllUsersDetailed()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+                
+                <div class="detailed-users-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID Unik</th>
+                                <th>Nama Lengkap</th>
+                                <th>No. Telepon</th>
+                                <th>Terdaftar</th>
+                                <th>Saldo</th>
+                                <th>Poin</th>
+                                <th>Jumlah Transaksi</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="detailedUsersTableBody">
+                            <!-- Detailed users will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- All Transactions Tab -->
+            <div id="transactions-tab" class="admin-tab-content">
+                <div class="search-filter-container">
+                    <input type="text" id="transactionSearchInput" class="search-input" placeholder="Cari transaksi...">
+                    <div class="filter-dropdown">
+                        <select id="statusFilter" class="filter-select">
+                            <option value="all">Semua Status</option>
+                            <option value="success">Berhasil</option>
+                            <option value="pending">Menunggu</option>
+                            <option value="cancelled">Dibatalkan</option>
+                            <option value="failed">Gagal</option>
+                        </select>
+                    </div>
+                    <button class="btn-refresh" onclick="loadAllTransactions()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+                
+                <div class="transactions-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID Transaksi</th>
+                                <th>Nama Pengguna</th>
+                                <th>No. Telepon</th>
+                                <th>Jumlah</th>
+                                <th>Tanggal</th>
+                                <th>Status</th>
+                                <th>Tipe</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="allTransactionsTableBody">
+                            <!-- All transactions will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Services Tab -->
+            <div id="services-tab" class="admin-tab-content">
+                <div class="search-filter-container">
+                    <input type="text" id="serviceSearchInput" class="search-input" placeholder="Cari pengguna...">
+                    <button class="btn-refresh" onclick="loadAllUsersForServices()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+                
+                <div class="users-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>No. Telepon</th>
+                                <th>Email</th>
+                                <th>Tanggal Registrasi</th>
+                                <th>Saldo</th>
+                                <th>Poin</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="servicesUsersTableBody">
+                            <!-- User data will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Edit Balance Modal -->
+    <div id="editBalanceModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('editBalanceModal')">&times;</span>
+            <h2 class="modal-title">Edit Saldo</h2>
+            <form class="modal-form" onsubmit="handleBalanceUpdate(event)">
+                <input type="hidden" id="editBalancePhone">
+                
+                <div class="form-group">
+                    <label>Saldo Saat Ini:</label>
+                    <div id="currentBalance" class="current-value"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="newBalance">Saldo Baru:</label>
+                    <input type="text" 
+                        id="newBalance" 
+                        class="modal-input" 
+                        placeholder="Masukkan saldo baru"
+                        oninput="formatRupiahInput(this)"
+                        required>
+                </div>
+                
+                <button type="submit" class="modal-btn">Simpan</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Points Modal -->
+    <div id="editPointsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('editPointsModal')">&times;</span>
+            <h2 class="modal-title">Edit Poin</h2>
+            <form class="modal-form" onsubmit="handlePointsUpdate(event)">
+                <input type="hidden" id="editPointsPhone">
+                
+                <div class="form-group">
+                    <label>Poin Saat Ini:</label>
+                    <div id="currentPoints" class="current-value"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="newPoints">Poin Baru:</label>
+                    <input type="text" 
+                        id="newPoints" 
+                        class="modal-input" 
+                        placeholder="Masukkan jumlah poin baru" 
+                        required>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal('editPointsModal')">Batal</button>
+                    <button type="submit" class="btn-save">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Points Modal -->
+    <div id="addPointsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('addPointsModal')">&times;</span>
+            <h2 class="modal-title">Tambah Poin</h2>
+            <form class="modal-form" onsubmit="handleAddPoints(event)">
+                <input type="hidden" id="addPointsPhone">
+                
+                <div class="form-group">
+                    <label>Poin Saat Ini:</label>
+                    <div id="currentPointsForAdd" class="current-value"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pointsToAdd">Poin yang Ditambahkan:</label>
+                    <input type="text" 
+                        id="pointsToAdd" 
+                        class="modal-input" 
+                        placeholder="Masukkan jumlah poin untuk ditambahkan" 
+                        required>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal('addPointsModal')">Batal</button>
+                    <button type="submit" class="btn-save">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Details Modal -->
+    <div id="userDetailsModal" class="modal">
+        <div class="modal-content user-details-modal">
+            <span class="close-modal" onclick="closeModal('userDetailsModal')">&times;</span>
+            <h2 class="modal-title">Detail Pengguna</h2>
+            
+            <div class="user-details-tabs">
+                <button class="tab-button active" data-tab="profile">Profil</button>
+                <button class="tab-button" data-tab="transactions">Riwayat Transaksi</button>
+                <button class="tab-button" data-tab="services">Riwayat Servis</button>
+            </div>
+
+            <div id="profileTab" class="tab-content active">
+                <div class="profile-info">
+                    <!-- Will be filled by JavaScript -->
+                </div>
+            </div>
+
+            <div id="transactionsTab" class="tab-content">
+                <div class="transactions-list">
+                    <!-- Will be filled by JavaScript -->
+                </div>
+            </div>
+
+            <div id="servicesTab" class="tab-content">
+                <div class="services-list">
+                    <!-- Will be filled by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Service Modal -->
+    <div id="addServiceModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('addServiceModal')">&times;</span>
+            <h2 class="modal-title">Tambah Servis</h2>
+            <form class="modal-form" onsubmit="handleAddService(event)">
+                <input type="hidden" id="serviceUserPhone">
+                <input type="hidden" id="serviceUserName">
+                
+                <div class="form-group">
+                    <label>Pengguna:</label>
+                    <div id="serviceUserNameDisplay" class="current-value"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="serviceDescription">Deskripsi Servis:</label>
+                    <textarea 
+                        id="serviceDescription" 
+                        class="modal-textarea" 
+                        placeholder="Masukkan deskripsi servis"
+                        rows="3" 
+                        required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="servicePrice">Harga Servis:</label>
+                    <input type="text" 
+                        id="servicePrice" 
+                        class="modal-input" 
+                        placeholder="Masukkan harga servis" 
+                        required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="servicePoints">Poin yang Ditambahkan:</label>
+                    <input type="text" 
+                        id="servicePoints" 
+                        class="modal-input" 
+                        placeholder="Masukkan jumlah poin" 
+                        required>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal('addServiceModal')">Batal</button>
+                    <button type="submit" class="btn-save">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Check admin authentication
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!isAdminLoggedIn()) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Load initial data
+            loadUsers();
+            
+            // Add tab switching functionality
+            document.querySelectorAll('.admin-tab-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    document.querySelectorAll('.admin-tab-button').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    button.classList.add('active');
+                    document.getElementById(`${button.dataset.tab}-tab`).classList.add('active');
+                    
+                    // Load data for the selected tab if needed
+                    if (button.dataset.tab === 'all-users') {
+                        loadAllUsersDetailed();
+                    } else if (button.dataset.tab === 'transactions') {
+                        loadAllTransactions();
+                    } else if (button.dataset.tab === 'services') {
+                        loadAllUsersForServices();
+                    }
+                });
+            });
+            
+            // Add search functionality for users
+            document.getElementById('userSearchInput').addEventListener('input', function() {
+                filterUsers(this.value);
+            });
+            
+            // Add search functionality for services users
+            document.getElementById('serviceSearchInput').addEventListener('input', function() {
+                filterServicesUsers(this.value);
+            });
+            
+            // Add search and filter functionality for transactions
+            document.getElementById('transactionSearchInput').addEventListener('input', function() {
+                filterTransactions();
+            });
+            
+            document.getElementById('statusFilter').addEventListener('change', function() {
+                filterTransactions();
+            });
+
+            // Add tab switching for user details modal
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    // Get the parent modal
+                    const modal = button.closest('.modal');
+                    
+                    // Remove active class from all tabs in this modal
+                    modal.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                    modal.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    button.classList.add('active');
+                    modal.querySelector(`#${button.dataset.tab}Tab`).classList.add('active');
+                });
+            });
+        });
+
+        // Load users data with more details
+        async function loadUsers() {
+            console.log("Loading users...");
+            const result = await getAllUsers();
+            console.log("getAllUsers result:", result);
+            
+            if (result.success) {
+                const tbody = document.getElementById('usersTableBody');
+                tbody.innerHTML = '';
+
+                // Calculate totals for stats
+                let totalBalance = 0;
+                let totalPoints = 0;
+                let totalTransactionsCount = 0;
+
+                if (result.users.length === 0) {
+                    console.log("No users found");
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No users found</td></tr>';
+                } else {
+                    console.log(`Found ${result.users.length} users`);
+                    
+                    result.users.forEach(user => {
+                        console.log("Processing user:", user);
+                        const tr = document.createElement('tr');
+                        
+                        // Add to totals
+                        totalBalance += parseInt(user.balance || 0);
+                        totalPoints += parseInt(user.points || 0);
+                        totalTransactionsCount += user.transactions ? user.transactions.length : 0;
+                        
+                        tr.innerHTML = `
+                            <td>${user.firstName || ''} ${user.lastName || ''}</td>
+                            <td>${user.phone || 'N/A'}</td>
+                            <td>${formatRupiah(user.balance || 0)}</td>
+                            <td>${user.points || 0}</td>
+                            <td>
+                                <button class="btn-edit" onclick="showEditBalanceModal('${user.phone}', ${user.balance || 0})">
+                                    <i class="fas fa-wallet"></i> Edit Saldo
+                                </button>
+                                <button class="btn-edit" onclick="showEditPointsModal('${user.phone}', ${user.points || 0})">
+                                    <i class="fas fa-star"></i>
+                                </button>
+                                <button class="btn-view" onclick="showUserDetails('${user.phone}')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+                
+                // Update stats
+                document.getElementById('totalUsersCount').textContent = result.users.length;
+                document.getElementById('totalBalance').textContent = formatRupiah(totalBalance);
+                document.getElementById('totalTransactions').textContent = totalTransactionsCount;
+                document.getElementById('totalPoints').textContent = totalPoints;
+            } else {
+                console.error("Failed to load users:", result.message);
+                alert("Failed to load users: " + result.message);
+            }
+        }
+
+        // Show user details
+        async function showUserDetails(phone) {
+            console.log("Showing details for user with phone:", phone);
+            const result = await getUserDetails(phone);
+            console.log("getUserDetails result:", result);
+            
+            if (result.success) {
+                const user = result.user;
+                console.log("User details:", user);
+                
+                // Fill profile tab
+                document.querySelector('#profileTab .profile-info').innerHTML = `
+                    <div class="history-item">
+                        <h3>Informasi Pribadi</h3>
+                        <p><strong>Nama:</strong> ${user.firstName || ''} ${user.lastName || ''}</p>
+                        <p><strong>No. Telepon:</strong> <span class="user-detail-phone">${user.phone || 'N/A'}</span></p>
+                        <p><strong>ID Unik:</strong> ${user.uniqueId || 'N/A'}</p>
+                        <p><strong>Terdaftar:</strong> ${user.registrationDate || 'N/A'}</p>
+                        <p><strong>Saldo:</strong> ${formatRupiah(user.balance || 0)}</p>
+                        <p><strong>Poin:</strong> ${user.points || 0}</p>
+                        <div style="margin-top: 15px;">
+                            <button class="btn-add-points" onclick="showAddPointsModal('${user.phone}', ${user.points || 0})">
+                                <i class="fas fa-plus-circle"></i> Tambah Poin
+                            </button>
+                            <button class="btn-edit-points" onclick="showEditPointsModal('${user.phone}', ${user.points || 0})">
+                                <i class="fas fa-edit"></i> Edit Poin
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                // Fill transactions tab
+                const transactionsList = document.querySelector('#transactionsTab .transactions-list');
+                if (!user.transactions || user.transactions.length === 0) {
+                    transactionsList.innerHTML = '<p>Belum ada transaksi</p>';
+                } else {
+                    transactionsList.innerHTML = '';
+                    user.transactions.forEach(transaction => {
+                        const transactionDate = transaction.timestamp 
+                            ? new Date(transaction.timestamp).toLocaleString('id-ID')
+                            : 'N/A';
+                        
+                        const statusText = {
+                            'success': 'Berhasil',
+                            'pending': 'Menunggu',
+                            'failed': 'Gagal',
+                            'cancelled': 'Dibatalkan'
+                        }[transaction.status] || transaction.status || 'N/A';
+                        
+                        // Determine if we should show the inject deposit button
+                        const showInjectButton = transaction.status === 'pending' && 
+                                                (transaction.type === 'deposit' || !transaction.type);
+                        
+                        let actionButtons = '';
+
+                        if (showInjectButton) {
+                            actionButtons = `
+                                <button class="btn-inject-deposit" onclick="handleInjectDeposit('${user.phone}', '${transaction.transactionId || transaction.orderId}', ${transaction.amount})">
+                                    <i class="fas fa-check-circle"></i> Inject
+                                </button>`;
+                        } else {
+                            actionButtons = `
+                                <button class="btn-view-details" onclick="showUserDetails('${user.phone}')">
+                                    <i class="fas fa-eye"></i> Detail
+                                </button>
+                                <button class="btn-add-points" onclick="showAddPointsModal('${user.phone}', 0)">
+                                    <i class="fas fa-plus-circle"></i> Poin
+                                </button>`;
+                        }
+                        
+                        transactionsList.innerHTML += `
+                            <div class="history-item">
+                                <div class="history-date">${transactionDate}</div>
+                                <div class="history-details">
+                                    <p><strong>ID Transaksi:</strong> ${transaction.transactionId || transaction.orderId || 'N/A'}</p>
+                                    <p><strong>Jumlah:</strong> ${formatRupiah(transaction.amount || 0)}</p>
+                                    <p><strong>Status:</strong> 
+                                        <span class="status-badge status-${transaction.status || 'unknown'}">
+                                            ${statusText}
+                                        </span>
+                                    </p>
+                                    <p><strong>Tipe:</strong> ${transaction.type || 'deposit'}</p>
+                                    ${transaction.bonusAmount ? `<p><strong>Bonus:</strong> ${formatRupiah(transaction.bonusAmount)}</p>` : ''}
+                                    ${transaction.cancelledAt ? `<p><strong>Dibatalkan pada:</strong> ${new Date(transaction.cancelledAt).toLocaleString('id-ID')}</p>` : ''}
+                                    ${actionButtons}
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+
+                // Fill services tab
+                const servicesList = document.querySelector('#servicesTab .services-list');
+                if (!user.serviceHistory || user.serviceHistory.length === 0) {
+                    servicesList.innerHTML = '<p>Belum ada riwayat servis</p>';
+                } else {
+                    servicesList.innerHTML = '';
+                    user.serviceHistory.forEach(service => {
+                        const serviceDate = service.timestamp 
+                            ? new Date(service.timestamp).toLocaleString('id-ID')
+                            : 'N/A';
+                        
+                        servicesList.innerHTML += `
+                            <div class="service-history-item">
+                                <div class="service-date">${serviceDate}</div>
+                                <div class="service-description">${service.description || 'Tidak ada deskripsi'}</div>
+                                <div class="service-price-points">
+                                    <span class="service-price">${formatRupiah(service.price || 0)}</span>
+                                    <span class="service-points">+${service.points || 0} Poin</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+
+                // Show modal
+                document.getElementById('userDetailsModal').style.display = 'flex';
+                
+                // Reset active tab
+                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                document.querySelector('.tab-button[data-tab="profile"]').classList.add('active');
+                document.getElementById('profileTab').classList.add('active');
+            } else {
+                console.error("Failed to get user details:", result.message);
+                alert("Failed to get user details: " + result.message);
+            }
+        }
+
+        // Modal functions
+        function showEditBalanceModal(phone, currentBalance) {
+            document.getElementById('editBalancePhone').value = phone;
+            document.getElementById('currentBalance').textContent = formatRupiah(currentBalance);
+            document.getElementById('newBalance').value = '';
+            document.getElementById('editBalanceModal').style.display = 'flex';
+        }
+
+        function showEditPointsModal(phone, currentPoints) {
+            document.getElementById('editPointsPhone').value = phone;
+            document.getElementById('currentPoints').textContent = currentPoints;
+            document.getElementById('newPoints').value = '';
+            document.getElementById('editPointsModal').style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Format Rupiah input
+        function formatRupiahInput(input) {
+            let value = input.value.replace(/[^0-9]/g, '');
+            input.value = formatRupiah(value);
+        }
+
+        // Handle balance update
+        async function handleBalanceUpdate(event) {
+            event.preventDefault();
+            const phone = document.getElementById('editBalancePhone').value;
+            const newBalance = parseRupiah(document.getElementById('newBalance').value);
+            
+            if (isNaN(newBalance)) {
+                alert('Masukkan jumlah saldo yang valid');
+                return;
+            }
+
+            const result = await updateUserBalance(phone, newBalance);
+            if (result.success) {
+                alert('Saldo berhasil diperbarui');
+                closeModal('editBalanceModal');
+                loadUsers();
+                loadAllUsersDetailed();
+            } else {
+                alert(result.message || 'Gagal memperbarui saldo');
+            }
+        }
+
+        // Handle points update
+        async function handlePointsUpdate(event) {
+            event.preventDefault();
+            const phone = document.getElementById('editPointsPhone').value;
+            const newPoints = parseInt(document.getElementById('newPoints').value);
+            
+            if (isNaN(newPoints)) {
+                alert('Masukkan jumlah poin yang valid');
+                return;
+            }
+
+            const result = await updateUserPoints(phone, newPoints);
+            if (result.success) {
+                alert('Poin berhasil diperbarui');
+                closeModal('editPointsModal');
+                loadUsers();
+                loadAllUsersDetailed();
+            } else {
+                alert(result.message || 'Gagal memperbarui poin');
+            }
+        }
+
+        // Handle inject deposit
+        async function handleInjectDeposit(phone, transactionId, amount) {
+            if (!confirm(`Anda yakin ingin menyetujui deposit sebesar ${formatRupiah(amount)} untuk pengguna ini?`)) {
+                return;
+            }
+            
+            console.log(`Injecting deposit for user ${phone}, transaction ${transactionId}, amount ${amount}`);
+            
+            // Show loading indicator or disable button
+            const buttons = document.querySelectorAll(`.btn-inject-deposit[onclick*="${transactionId}"]`);
+            buttons.forEach(button => {
+                button.disabled = true;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            });
+            
+            try {
+                const result = await injectDeposit(phone, transactionId, amount);
+                
+                if (result.success) {
+                    alert(result.message);
+                    
+                    // Refresh user details to show updated balance and transaction status
+                    await showUserDetails(phone);
+                    
+                    // Also refresh the main users list to show updated balance
+                    loadUsers();
+                    loadAllUsersDetailed();
+                } else {
+                    alert(result.message || 'Gagal menyetujui deposit');
+                    
+                    // Re-enable buttons if failed
+                    buttons.forEach(button => {
+                        button.disabled = false;
+                        button.innerHTML = '<i class="fas fa-check-circle"></i> Inject Deposit';
+                    });
+                }
+            } catch (error) {
+                console.error('Error handling inject deposit:', error);
+                alert('Terjadi kesalahan saat menyetujui deposit');
+                
+                // Re-enable buttons if error
+                buttons.forEach(button => {
+                    button.disabled = false;
+                    button.innerHTML = '<i class="fas fa-check-circle"></i> Inject Deposit';
+                });
+            }
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Load detailed user information
+        async function loadAllUsersDetailed() {
+            console.log("Loading detailed user information...");
+            const result = await getAllUsers();
+            console.log("getAllUsers result for detailed view:", result);
+            
+            if (result.success) {
+                const tbody = document.getElementById('detailedUsersTableBody');
+                tbody.innerHTML = '';
+
+                if (result.users.length === 0) {
+                    console.log("No users found for detailed view");
+                    tbody.innerHTML = '<tr><td colspan="8" style="text-align: center;">No users found</td></tr>';
+                    return;
+                }
+
+                console.log(`Found ${result.users.length} users for detailed view`);
+                
+                result.users.forEach(user => {
+                    console.log("Processing user for detailed view:", user);
+                    const tr = document.createElement('tr');
+                    
+                    // Format registration date
+                    const registrationDate = user.created 
+                        ? new Date(user.created).toLocaleDateString('id-ID', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })
+                        : 'N/A';
+                    
+                    tr.innerHTML = `
+                        <td><span class="user-id">${user.uniqueId || 'N/A'}</span></td>
+                        <td>${user.firstName || ''} ${user.lastName || ''}</td>
+                        <td>${user.phone || 'N/A'}</td>
+                        <td>${registrationDate}</td>
+                        <td>${formatRupiah(user.balance || 0)}</td>
+                        <td>${user.points || 0}</td>
+                        <td>${user.transactions ? user.transactions.length : 0}</td>
+                        <td>
+                            <button class="btn-edit" onclick="showEditBalanceModal('${user.phone}', ${user.balance || 0})">
+                                <i class="fas fa-wallet"></i> Edit Saldo
+                            </button>
+                            <button class="btn-view-details" onclick="showUserDetails('${user.phone}')">
+                                Detail
+                            </button>
+                            <button class="btn-delete-user" onclick="confirmDeleteUser('${user.phone}')">
+                                Hapus
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } else {
+                console.error("Failed to load detailed user information:", result.message);
+                alert("Failed to load detailed user information: " + result.message);
+            }
+        }
+
+        // Load all transactions from all users
+        async function loadAllTransactions() {
+            console.log("Loading all transactions...");
+            const result = await getAllTransactions();
+            console.log("getAllTransactions result:", result);
+            
+            if (result.success) {
+                const tbody = document.getElementById('allTransactionsTableBody');
+                tbody.innerHTML = '';
+
+                if (!result.transactions || result.transactions.length === 0) {
+                    console.log("No transactions found");
+                    tbody.innerHTML = '<tr><td colspan="8" style="text-align: center;">No transactions found</td></tr>';
+                    return;
+                }
+
+                console.log(`Found ${result.transactions.length} transactions`);
+                
+                result.transactions.forEach(transaction => {
+                    console.log("Processing transaction:", transaction);
+                    const tr = document.createElement('tr');
+                    
+                    // Format date
+                    const transactionDate = transaction.timestamp 
+                        ? new Date(transaction.timestamp).toLocaleDateString('id-ID', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })
+                        : 'N/A';
+                    
+                    // Map status to Indonesian
+                    const statusText = {
+                        'success': 'Berhasil',
+                        'pending': 'Menunggu',
+                        'failed': 'Gagal',
+                        'cancelled': 'Dibatalkan'
+                    }[transaction.status] || transaction.status || 'N/A';
+                    
+                    // Determine if we should show the inject deposit button
+                    const showInjectButton = transaction.status === 'pending' && 
+                                           (transaction.type === 'deposit' || !transaction.type);
+                    
+                    let actionButtons = '';
+
+                    if (showInjectButton) {
+                        actionButtons = `
+                            <button class="btn-inject-deposit" onclick="handleInjectDeposit('${transaction.userPhone}', '${transaction.transactionId || transaction.orderId}', ${transaction.amount})">
+                                <i class="fas fa-check-circle"></i> Inject
+                            </button>`;
+                    } else {
+                        actionButtons = `
+                            <button class="btn-view-details" onclick="showUserDetails('${transaction.userPhone}')">
+                                <i class="fas fa-eye"></i> Detail
+                            </button>
+                            <button class="btn-add-points" onclick="showAddPointsModal('${transaction.userPhone}', 0)">
+                                <i class="fas fa-plus-circle"></i> Poin
+                            </button>`;
+                    }
+                    
+                    tr.innerHTML = `
+                        <td><span class="transaction-id">${transaction.transactionId || transaction.orderId || 'N/A'}</span></td>
+                        <td>${transaction.userName || 'N/A'}</td>
+                        <td>${transaction.userPhone || 'N/A'}</td>
+                        <td>${formatRupiah(transaction.amount || 0)}</td>
+                        <td>${transactionDate}</td>
+                        <td>
+                            <span class="status-badge status-${transaction.status || 'unknown'}">
+                                ${statusText}
+                            </span>
+                        </td>
+                        <td>${transaction.type || 'deposit'}</td>
+                        <td>${actionButtons}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } else {
+                console.error("Failed to load transactions:", result.message);
+                alert("Failed to load transactions: " + result.message);
+            }
+        }
+
+        // Filter users based on search input
+        function filterUsers(searchTerm) {
+            searchTerm = searchTerm.toLowerCase();
+            const rows = document.querySelectorAll('#detailedUsersTableBody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        }
+
+        // Filter users in the services tab based on search input
+        function filterServicesUsers(searchTerm) {
+            searchTerm = searchTerm.toLowerCase();
+            const rows = document.querySelectorAll('#servicesUsersTableBody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        }
+
+        // Filter transactions based on search input and status filter
+        function filterTransactions() {
+            const searchTerm = document.getElementById('transactionSearchInput').value.toLowerCase();
+            const statusFilter = document.getElementById('statusFilter').value;
+            const rows = document.querySelectorAll('#allTransactionsTableBody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                const statusMatch = statusFilter === 'all' || row.querySelector(`.status-${statusFilter}`) !== null;
+                row.style.display = (text.includes(searchTerm) && statusMatch) ? '' : 'none';
+            });
+        }
+
+        // Confirm user deletion
+        function confirmDeleteUser(phone) {
+            if (confirm('Anda yakin ingin menghapus pengguna ini? Semua data termasuk saldo dan riwayat transaksi akan dihapus.')) {
+                deleteUser(phone);
+            }
+        }
+
+        // Delete user
+        async function deleteUser(phone) {
+            try {
+                const result = await adminDeleteUser(phone);
+                if (result.success) {
+                    alert('Pengguna berhasil dihapus');
+                    loadUsers();
+                    loadAllUsersDetailed();
+                    loadAllTransactions();
+                } else {
+                    alert(result.message || 'Gagal menghapus pengguna');
+                }
+            } catch (error) {
+                console.error('Delete user error:', error);
+                alert('Terjadi kesalahan saat menghapus pengguna');
+            }
+        }
+
+        // Format number to Rupiah
+        function formatRupiah(number) {
+            if (number === null || number === undefined) return "Rp 0";
+            
+            // Convert to number if it's a string
+            const amount = typeof number === 'string' ? parseInt(number) : number;
+            
+            // Format the number
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(amount).replace(/\s/g, '');
+        }
+
+        // Parse Rupiah string to number
+        function parseRupiah(rupiahString) {
+            if (!rupiahString) return 0;
+            return parseInt(rupiahString.replace(/[^\d]/g, '')) || 0;
+        }
+
+        // Function to load all users for services tab
+        async function loadAllUsersForServices() {
+            try {
+                // Show loading state
+                document.getElementById('servicesUsersTableBody').innerHTML = '<tr><td colspan="7" class="loading-message">Memuat data pengguna...</td></tr>';
+                
+                // Get all users
+                const result = await getAllUsers();
+                console.log("getAllUsers result for services:", result);
+                
+                if (result.success) {
+                    const users = result.users;
+                    const tableBody = document.getElementById('servicesUsersTableBody');
+                    
+                    // Clear the loading message
+                    tableBody.innerHTML = '';
+                    
+                    if (users.length === 0) {
+                        tableBody.innerHTML = '<tr><td colspan="7" class="empty-message">Tidak ada pengguna yang ditemukan</td></tr>';
+                        return;
+                    }
+                    
+                    let totalBalance = 0;
+                    let totalPoints = 0;
+                    
+                    // Loop through users and create table rows
+                    users.forEach(user => {
+                        // Calculate total balance and points
+                        totalBalance += parseInt(user.balance || 0);
+                        totalPoints += parseInt(user.points || 0);
+                        
+                        // Format the date
+                        const createdDate = new Date(user.created || Date.now());
+                        const formattedDate = createdDate.toLocaleDateString('id-ID');
+                        
+                        // Create table row for each user
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${user.firstName || ''} ${user.lastName || ''}</td>
+                            <td>${user.phone || 'N/A'}</td>
+                            <td>${user.email || 'N/A'}</td>
+                            <td>${formattedDate}</td>
+                            <td>${formatRupiah(user.balance || 0)}</td>
+                            <td>${user.points || 0}</td>
+                            <td>
+                                <button class="btn-add-service" onclick="showAddServiceModal('${user.phone}', '${user.firstName} ${user.lastName}')">
+                                    Tambah Servis
+                                </button>
+                            </td>
+                        `;
+                        
+                        tableBody.appendChild(row);
+                    });
+                } else {
+                    document.getElementById('servicesUsersTableBody').innerHTML = 
+                        '<tr><td colspan="7" class="error-message">Gagal memuat data pengguna</td></tr>';
+                }
+            } catch (error) {
+                console.error('Error loading users for services:', error);
+                document.getElementById('servicesUsersTableBody').innerHTML = 
+                    '<tr><td colspan="7" class="error-message">Error: ' + error.message + '</td></tr>';
+            }
+        }
+
+        // Show Add Service Modal
+        function showAddServiceModal(phone, name) {
+            document.getElementById('serviceUserPhone').value = phone;
+            document.getElementById('serviceUserName').value = name;
+            document.getElementById('serviceUserNameDisplay').textContent = name;
+            document.getElementById('serviceDescription').value = '';
+            document.getElementById('servicePrice').value = '';
+            document.getElementById('servicePoints').value = '';
+            document.getElementById('addServiceModal').style.display = 'flex';
+        }
+
+        // Handle Add Service
+        async function handleAddService(event) {
+            event.preventDefault();
+            
+            const phone = document.getElementById('serviceUserPhone').value;
+            const userName = document.getElementById('serviceUserName').value;
+            const description = document.getElementById('serviceDescription').value;
+            const price = parseInt(document.getElementById('servicePrice').value.replace(/\D/g, '')); // Remove non-digits
+            const points = parseInt(document.getElementById('servicePoints').value);
+            
+            if (isNaN(price) || price < 0) {
+                alert('Harga servis harus berupa angka positif');
+                return;
+            }
+            
+            if (isNaN(points) || points < 0) {
+                alert('Poin harus berupa angka positif');
+                return;
+            }
+            
+            try {
+                // Create a new service record
+                const service = {
+                    id: `SRV-${Date.now()}-${Math.floor(Math.random() * 10000)}`,
+                    userPhone: phone,
+                    userName: userName,
+                    description: description,
+                    price: price,
+                    points: points,
+                    timestamp: new Date().toISOString()
+                };
+                
+                // 1. Add service record to user's service history
+                const addServiceResult = await addServiceToUser(phone, service);
+                
+                if (addServiceResult.success) {
+                    // 2. Add points to user
+                    const pointsResult = await addPointsToUser(phone, points);
+                    
+                    if (pointsResult.success) {
+                        alert(`Servis berhasil ditambahkan dan ${points} poin telah ditambahkan ke akun pengguna.`);
+                    } else {
+                        alert(`Servis berhasil ditambahkan tetapi gagal menambahkan poin: ${pointsResult.message}`);
+                    }
+                    
+                    closeModal('addServiceModal');
+                    
+                    // Refresh the users table
+                    loadAllUsersForServices();
+                } else {
+                    alert(`Gagal menambahkan servis: ${addServiceResult.message}`);
+                }
+            } catch (error) {
+                console.error('Error adding service:', error);
+                alert('Terjadi kesalahan saat menambahkan servis.');
+            }
+        }
+
+        // Add service to user's service history
+        async function addServiceToUser(phone, service) {
+            try {
+                // Get existing services for the user
+                const servicesKey = `user:${phone}:services`;
+                const response = await redisRequest('get', [servicesKey]);
+                
+                let services = [];
+                if (response.success && response.result) {
+                    try {
+                        services = JSON.parse(response.result);
+                        if (!Array.isArray(services)) {
+                            services = [];
+                        }
+                    } catch (e) {
+                        console.error('Error parsing services:', e);
+                        services = [];
+                    }
+                }
+                
+                // Add new service to beginning of array
+                services.unshift(service);
+                
+                // Save updated services list
+                const saveResult = await redisRequest('set', [servicesKey, JSON.stringify(services)]);
+                
+                if (saveResult.success) {
+                    return { success: true };
+                } else {
+                    return { success: false, message: 'Failed to save service history' };
+                }
+            } catch (error) {
+                console.error('Add service error:', error);
+                return { success: false, message: error.message };
+            }
+        }
+
+        // Add points to user
+        async function addPointsToUser(phone, pointsToAdd) {
+            try {
+                if (isNaN(pointsToAdd) || pointsToAdd < 0) {
+                    return { success: false, message: 'Invalid points amount' };
+                }
+                
+                // Get current points
+                const pointsKey = `user:${phone}:points`;
+                const response = await redisRequest('get', [pointsKey]);
+                
+                let currentPoints = 0;
+                if (response.success && response.result) {
+                    currentPoints = parseInt(response.result) || 0;
+                }
+                
+                // Calculate new points
+                const newPoints = currentPoints + pointsToAdd;
+                
+                // Update points in Redis
+                const updateResult = await redisRequest('set', [pointsKey, newPoints.toString()]);
+                
+                if (updateResult.success) {
+                    return { success: true, points: newPoints };
+                } else {
+                    return { success: false, message: 'Failed to update points' };
+                }
+            } catch (error) {
+                console.error('Add points error:', error);
+                return { success: false, message: error.message };
+            }
+        }
+
+        // Show Add Points Modal function
+        function showAddPointsModal(phone, currentPoints) {
+            document.getElementById('addPointsPhone').value = phone;
+            document.getElementById('currentPointsForAdd').textContent = currentPoints;
+            document.getElementById('pointsToAdd').value = '';
+            document.getElementById('addPointsModal').style.display = 'flex';
+        }
+
+        // Handle Add Points
+        async function handleAddPoints(event) {
+            event.preventDefault();
+            
+            const phone = document.getElementById('addPointsPhone').value;
+            const pointsToAdd = parseInt(document.getElementById('pointsToAdd').value);
+            
+            if (isNaN(pointsToAdd)) {
+                alert('Jumlah poin harus berupa angka');
+                return;
+            }
+            
+            try {
+                const result = await addPointsToUser(phone, pointsToAdd);
+                
+                if (result.success) {
+                    alert(`Berhasil menambahkan ${pointsToAdd} poin.`);
+                    closeModal('addPointsModal');
+                    
+                    // Refresh the user data
+                    if (document.getElementById('all-users-tab').classList.contains('active')) {
+                        await loadAllUsers();
+                    } else if (document.getElementById('transactions-tab').classList.contains('active')) {
+                        await loadAllTransactions();
+                    } else if (document.getElementById('services-tab').classList.contains('active')) {
+                        await loadAllUsersForServices();
+                    }
+                    
+                    // If user details are shown, refresh them
+                    const userDetailsModal = document.getElementById('userDetailsModal');
+                    if (userDetailsModal.style.display === 'flex') {
+                        const currentPhone = document.querySelector('#userDetailsModal .user-detail-phone').textContent;
+                        if (currentPhone === phone) {
+                            await showUserDetails(phone);
+                        }
+                    }
+                } else {
+                    alert(`Gagal menambahkan poin: ${result.message}`);
+                }
+            } catch (error) {
+                console.error('Error adding points:', error);
+                alert('Terjadi kesalahan saat menambahkan poin.');
+            }
+        }
+    </script>
+</body>
+</html> 
