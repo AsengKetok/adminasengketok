@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Saya - Bengkel Aseng Ketok</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+    <style>
+        /* Profile page specific styles */
+        .profile-section {
+            padding: 8rem 0;
+            background-color: #f7f9fc;
+            min-height: calc(100vh - 300px);
+            background-image: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(52, 152, 219, 0.05) 100%);
+        }
+        
+        .profile-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+        }
+        
+        .profile-sidebar {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            border-top: 5px solid var(--color-primary);
+            height: fit-content;
+        }
+        
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            background-color: var(--color-primary);
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 5rem;
+            font-weight: 700;
+        }
+        
+        .profile-name {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+        
+        .profile-phone {
+            text-align: center;
+            font-size: 1.6rem;
+            margin-bottom: 2.5rem;
+            color: #718096;
+        }
+        
+        .profile-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .profile-menu-item {
+            margin-bottom: 1rem;
+        }
+        
+        .profile-menu-link {
+            display: flex;
+            align-items: center;
+            padding: 1.2rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 1.6rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .profile-menu-link:hover, .profile-menu-link.active {
+            background-color: rgba(255, 107, 53, 0.08);
+            color: var(--color-primary);
+        }
+        
+        .profile-menu-icon {
+            margin-right: 1.5rem;
+            width: 2rem;
+            text-align: center;
+        }
+        
+        .profile-content {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+        }
+        
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eaedf3;
+        }
+        
+        .profile-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 0;
+        }
+        
+        .profile-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+        
+        .profile-info {
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-label {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #718096;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-value {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+        
+        .profile-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 3rem;
+            gap: 1.5rem;
+        }
+        
+        .btn-logout {
+            padding: 1.2rem 2.5rem;
+            background-color: #f3f4f6;
+            color: #4b5563;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-logout:hover {
+            background-color: #e5e7eb;
+        }
+        
+        .btn-edit {
+            padding: 1.2rem 2.5rem;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-edit:hover {
+            background-color: var(--color-primary-dark);
+        }
+        
+        .profile-history {
+            margin-top: 3rem;
+        }
+        
+        .history-item {
+            padding: 2rem;
+            border-radius: 10px;
+            background-color: #f8fafc;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--color-primary);
+        }
+        
+        .history-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        
+        .history-date {
+            font-size: 1.4rem;
+            color: #718096;
+            margin-bottom: 1.5rem;
+        }
+        
+        .history-details {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .history-status {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .status-completed {
+            background-color: #d1fae5;
+            color: #047857;
+        }
+        
+        .status-pending {
+            background-color: #fef3c7;
+            color: #b45309;
+        }
+        
+        .empty-message {
+            text-align: center;
+            padding: 5rem 0;
+            color: #718096;
+            font-size: 1.8rem;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-form {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Balance Section */
+        .balance-section {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .balance-title {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .balance-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-deposit {
+            background-color: white;
+            color: var(--color-primary);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-deposit:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        /* Points Section */
+        .balance-section.points-section {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .balance-title.points-section {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .balance-amount.points-section {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Service History Styles */
+        .service-history-container {
+            margin-top: 1.5rem;
+        }
+
+        .service-history-item {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #6366F1;
+        }
+
+        .service-date {
+            font-size: 1.3rem;
+            color: #6b7280;
+            margin-bottom: 0.8rem;
+        }
+
+        .service-description {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .service-price-points {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .service-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .service-points {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #10B981;
+            background-color: rgba(16, 185, 129, 0.1);
+            padding: 0.4rem 0.8rem;
+            border-radius: 2rem;
+        }
+
+        /* Deposit Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            backdrop-filter: blur(3px);
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: white;
+            margin: 10% auto;
+            padding: 3.5rem;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 2rem;
+            top: 2rem;
+            font-size: 2.4rem;
+            cursor: pointer;
+            color: #718096;
+            transition: color 0.2s ease;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            color: var(--color-primary);
+            background-color: rgba(255, 107, 53, 0.1);
+        }
+
+        .modal-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .modal-subtitle {
+            font-size: 1.6rem;
+            color: #718096;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .deposit-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .deposit-option {
+            padding: 1.5rem;
+            background-color: #f8fafc;
+            color: #2d3748;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option-amount {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .option-bonus {
+            font-size: 1.3rem;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .deposit-option:hover {
+            background-color: rgba(255, 107, 53, 0.1);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        .deposit-actions {
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-cancel {
+            padding: 1.2rem 3rem;
+            background-color: #f3f4f6;
+            color: #4b5563;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            background-color: #e5e7eb;
+        }
+
+        @media (max-width: 576px) {
+            .deposit-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                padding: 2.5rem;
+                margin: 20% auto;
+            }
+        }
+
+        /* Transaction History */
+        .transaction-item {
+            padding: 2rem;
+            border-radius: 10px;
+            background-color: #f8fafc;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--color-primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .transaction-info {
+            flex: 1;
+        }
+
+        .transaction-amount {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .transaction-date {
+            font-size: 1.4rem;
+            color: #718096;
+            margin-top: 0.5rem;
+        }
+
+        .transaction-status {
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-left: 2rem;
+        }
+
+        .status-success {
+            background-color: #d1fae5;
+            color: #047857;
+        }
+
+        .status-pending {
+            background-color: #fef3c7;
+            color: #b45309;
+        }
+
+        .status-failed {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        /* Add these new styles */
+        .transaction-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-cancel-transaction {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel-transaction:hover {
+            background-color: #dc2626;
+        }
+
+        .status-cancelled {
+            background-color: #f3f4f6;
+            color: #6b7280;
+        }
+
+        /* Payment Details Modal Styles */
+        .payment-details-content {
+            max-width: 550px;
+        }
+
+        .payment-info {
+            background-color: #f8fafc;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .payment-instruction {
+            font-size: 1.6rem;
+            color: #4b5563;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .bank-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .bank-logo {
+            width: 100px;
+            height: auto;
+            margin-right: 2rem;
+        }
+
+        .account-details {
+            flex: 1;
+        }
+
+        .account-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .account-name {
+            font-size: 1.4rem;
+            color: #718096;
+        }
+
+        .user-id-container {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .user-id {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin: 0.8rem 0;
+            letter-spacing: 1px;
+        }
+
+        .id-note {
+            font-size: 1.2rem;
+            color: #718096;
+            margin-top: 0.5rem;
+        }
+
+        .payment-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .btn-send-proof {
+            padding: 1.2rem 3rem;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-send-proof:before {
+            content: '\f232';
+            font-family: 'Font Awesome 5 Brands';
+            margin-right: 1rem;
+        }
+
+        .btn-send-proof:hover {
+            background-color: #1da851;
+            transform: translateY(-2px);
+        }
+
+        .btn-delete-account {
+            padding: 1.2rem 2.5rem;
+            background-color: #fee2e2;
+            color: #b91c1c;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-delete-account:hover {
+            background-color: #fecaca;
+        }
+
+        /* Delete Account Modal Styles */
+        .delete-account-content {
+            max-width: 500px;
+        }
+
+        .delete-account-info {
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .delete-warning {
+            display: flex;
+            align-items: center;
+            background-color: #fee2e2;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .delete-warning i {
+            font-size: 2.4rem;
+            color: #b91c1c;
+            margin-right: 1.5rem;
+        }
+
+        .delete-warning p {
+            color: #b91c1c;
+            font-weight: 600;
+            font-size: 1.6rem;
+            flex: 1;
+        }
+
+        .delete-instruction {
+            font-size: 1.6rem;
+            color: #4b5563;
+            margin-bottom: 2rem;
+        }
+
+        .password-input-container {
+            margin-bottom: 2.5rem;
+        }
+
+        .delete-password-input {
+            width: 100%;
+            padding: 1.4rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1.6rem;
+            background-color: #f8fafc;
+        }
+
+        .delete-password-input:focus {
+            outline: none;
+            border-color: #b91c1c;
+            box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.1);
+        }
+
+        .delete-account-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-confirm-delete {
+            padding: 1.2rem 2.5rem;
+            background-color: #b91c1c;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-confirm-delete:hover {
+            background-color: #991b1b;
+        }
+
+        .transfer-details {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .transfer-amount-label {
+            font-size: 1.5rem;
+            color: #4b5563;
+            margin-bottom: 0.5rem;
+        }
+
+        .transfer-amount {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .transfer-note {
+            font-size: 1.2rem;
+            color: #10b981;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-main">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="images/logo-removebg-preview.png.png" alt="Logo Bengkel" class="logo-img">
+                    <h1>Bengkel Aseng Ketok</h1>
+                </div>
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="nav-main">
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="layanan.html">Layanan</a></li>
+                        <li><a href="tentang.html">Tentang</a></li>
+                        <li><a href="kontak.html">Kontak</a></li>
+                        <li><a href="https://wa.me/6282246786617?text=Halo%20Bengkel%20Aseng%20Ketok%2C%20saya%20ingin%20booking%20servis." class="btn-booking">Booking Sekarang</a></li>
+                        <li><a href="akun.html" class="btn-login active">Profil Saya</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <a href="javascript:history.back()" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
+            <h1 class="page-title">Profil Saya</h1>
+            <p class="page-subtitle">Kelola informasi akun dan riwayat servis Anda</p>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-container">
+                <!-- Sidebar -->
+                <div class="profile-sidebar">
+                    <div class="profile-avatar" id="profileInitials">
+                        <!-- Will be filled by JavaScript -->
+                    </div>
+                    <h2 class="profile-name" id="profileName">
+                        <!-- Will be filled by JavaScript -->
+                    </h2>
+                    <p class="profile-phone" id="profilePhone">
+                        <!-- Will be filled by JavaScript -->
+                    </p>
+                    
+                    <ul class="profile-menu">
+                        <li class="profile-menu-item">
+                            <a href="#" class="profile-menu-link active" data-tab="profile-info">
+                                <i class="fas fa-user profile-menu-icon"></i>
+                                Informasi Profil
+                            </a>
+                        </li>
+                        <li class="profile-menu-item">
+                            <a href="#" class="profile-menu-link" data-tab="service-history">
+                                <i class="fas fa-history profile-menu-icon"></i>
+                                Riwayat Servis
+                            </a>
+                        </li>
+                        <li class="profile-menu-item">
+                            <a href="#" id="btnLogout" class="profile-menu-link">
+                                <i class="fas fa-sign-out-alt profile-menu-icon"></i>
+                                Keluar
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Content -->
+                <div class="profile-content">
+                    <div class="profile-header">
+                        <h1 class="profile-title">Profil Saya</h1>
+                    </div>
+
+                    <!-- Balance Section -->
+                    <div class="balance-section">
+                        <div class="balance-title">Saldo Anda</div>
+                        <div class="balance-amount" id="userBalance">Rp 0</div>
+                        <button class="btn-deposit" onclick="openDepositModal()">
+                            <i class="fas fa-plus-circle"></i> Deposit
+                        </button>
+                    </div>
+
+                    <!-- Points Section -->
+                    <div class="balance-section points-section">
+                        <div class="balance-title">Poin Anda</div>
+                        <div class="balance-amount" id="userPoints">0</div>
+                    </div>
+
+                    <!-- Profile Info Tab -->
+                    <div class="profile-tab active" id="profile-info-tab">
+                        <div class="profile-header">
+                            <h3 class="profile-title">Informasi Profil</h3>
+                        </div>
+                        
+                        <div class="profile-info-content">
+                            <div class="profile-form">
+                                <div class="profile-info">
+                                    <div class="info-label">Nama Depan</div>
+                                    <div class="info-value" id="infoFirstName"></div>
+                                </div>
+                                
+                                <div class="profile-info">
+                                    <div class="info-label">Nama Belakang</div>
+                                    <div class="info-value" id="infoLastName"></div>
+                                </div>
+                                
+                                <div class="profile-info">
+                                    <div class="info-label">Nomor Telepon</div>
+                                    <div class="info-value" id="infoPhone"></div>
+                                </div>
+                                
+                                <div class="profile-info">
+                                    <div class="info-label">Bergabung Sejak</div>
+                                    <div class="info-value" id="infoCreated"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-actions">
+                                <button class="btn-logout" id="logoutBtn">Keluar</button>
+                                <button class="btn-delete-account" id="deleteAccountBtn">Hapus Akun</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service History Tab -->
+                    <div class="profile-tab" id="service-history-tab">
+                        <div class="profile-header">
+                            <h3 class="profile-title">Riwayat Servis</h3>
+                        </div>
+                        
+                        <div class="profile-history" id="serviceHistory">
+                            <div class="empty-message">
+                                <i class="fas fa-clipboard-list" style="font-size: 5rem; margin-bottom: 2rem; opacity: 0.5;"></i>
+                                <p>Belum ada riwayat servis</p>
+                            </div>
+                            
+                            <!-- History items will be added by JavaScript if available -->
+                        </div>
+                    </div>
+
+                    <!-- Transaction History -->
+                    <div class="profile-history">
+                        <h2 class="profile-title">Riwayat Deposit</h2>
+                        <div id="transactionHistory">
+                            <!-- Transaction items will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <img src="images/logo-removebg-preview.png.png" alt="Logo Bengkel" class="footer-logo">
+                    <p>Bengkel Aseng Ketok - Solusi terpercaya untuk perawatan dan perbaikan kendaraan Anda.</p>
+                </div>
+                <div class="footer-contact">
+                    <h3>Hubungi Kami</h3>
+                    <p><i class="fas fa-phone"></i> +62 82246786617</p>
+                    <p><i class="fas fa-map-marker-alt"></i> JL. Tuamang No.2B, Medan</p>
+                </div>
+                <div class="footer-hours">
+                    <h3>Jam Operasional</h3>
+                    <p>Senin-Sabtu: 8.30 - 17.30</p>
+                    <p>Minggu: Tutup</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Ikuti Kami</h3>
+                    <div class="social-links">
+                        <a href="https://www.tiktok.com/@asengmagic"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/aseng_ketok/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/6282246786617"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.youtube.com/@Aseng-Ketok/shorts"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bengkel Aseng Ketok. By Marvin Berlin.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Deposit Modal -->
+    <div id="depositModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeDepositModal()">&times;</span>
+            <h2 class="modal-title">Deposit Saldo</h2>
+            <p class="modal-subtitle">Pilih jumlah deposit yang Anda inginkan:</p>
+            <div class="deposit-options">
+                <button class="deposit-option" onclick="handleDeposit(3000000)">
+                    <div class="option-amount">Rp 3.000.000</div>
+                    <div class="option-bonus">Bonus: Rp 540.000</div>
+                </button>
+                <button class="deposit-option" onclick="handleDeposit(5000000)">
+                    <div class="option-amount">Rp 5.000.000</div>
+                    <div class="option-bonus">Bonus: Rp 1.000.000</div>
+                </button>
+                <button class="deposit-option" onclick="handleDeposit(10000000)">
+                    <div class="option-amount">Rp 10.000.000</div>
+                    <div class="option-bonus">Bonus: Rp 2.200.000</div>
+                </button>
+                <button class="deposit-option" onclick="handleDeposit(15000000)">
+                    <div class="option-amount">Rp 15.000.000</div>
+                    <div class="option-bonus">Bonus: Rp 3.600.000</div>
+                </button>
+                <button class="deposit-option" onclick="handleDeposit(20000000)">
+                    <div class="option-amount">Rp 20.000.000</div>
+                    <div class="option-bonus">Bonus: Rp 5.200.000</div>
+                </button>
+            </div>
+            <div class="deposit-actions">
+                <button class="btn-cancel" onclick="closeDepositModal()">Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Details Modal -->
+    <div id="paymentDetailsModal" class="modal">
+        <div class="modal-content payment-details-content">
+            <span class="modal-close" onclick="closePaymentDetailsModal()">&times;</span>
+            <h2 class="modal-title">Deposit <span id="paymentAmount"></span></h2>
+            <div class="payment-info">
+                <p class="payment-instruction">Silahkan Transfer ke Rekening BCA:</p>
+                <div class="bank-info">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg" alt="Logo BCA" class="bank-logo">
+                    <div class="account-details">
+                        <div class="account-number">8280373223</div>
+                        <div class="account-name">A/N CHRISTIAN ARDI CHUANTA</div>
+                    </div>
+                </div>
+                <div class="transfer-details">
+                    <div class="transfer-amount-label">Jumlah Transfer:</div>
+                    <div class="transfer-amount" id="transferAmount"></div>
+                    <div class="transfer-note">Pembayaran sudah termasuk bonus</div>
+                </div>
+                <div class="user-id-container">
+                    <p>ID Akun Anda:</p>
+                    <div class="user-id" id="userId"></div>
+                    <p class="id-note">Gunakan ID ini saat mengirim bukti pembayaran</p>
+                </div>
+            </div>
+            <div class="payment-actions">
+                <button class="btn-send-proof" id="sendProofBtn">KIRIM BUKTI</button>
+                <button class="btn-cancel" onclick="closePaymentDetailsModal()">Kembali</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Account Modal -->
+    <div id="deleteAccountModal" class="modal">
+        <div class="modal-content delete-account-content">
+            <span class="modal-close" onclick="closeDeleteAccountModal()">&times;</span>
+            <h2 class="modal-title">Hapus Akun</h2>
+            <div class="delete-account-info">
+                <div class="delete-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Peringatan: Penghapusan akun bersifat permanen (termasuk saldo anda) dan tidak dapat dibatalkan.</p>
+                </div>
+                <p class="delete-instruction">Masukkan password Anda untuk mengkonfirmasi penghapusan:</p>
+                <form id="deleteAccountForm">
+                    <div class="password-input-container">
+                        <input type="password" id="deleteAccountPassword" class="delete-password-input" placeholder="Masukkan password Anda" required>
+                    </div>
+                    <div class="delete-account-actions">
+                        <button type="button" class="btn-cancel" onclick="closeDeleteAccountModal()">Batalkan</button>
+                        <button type="submit" class="btn-confirm-delete">Konfirmasi Hapus</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if user is logged in - use ONLY the original auth.js function
+        if (!isLoggedIn()) {
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        const sessionId = localStorage.getItem('bengkelSession');
+        const userData = JSON.parse(localStorage.getItem('bengkelUser'));
+        
+        // Helper function for making Redis REST API calls - matching auth.js implementation
+        async function redisRequest(command, args) {
+            try {
+                const UPSTASH_URL = "https://verified-pangolin-19430.upstash.io";
+                const UPSTASH_TOKEN = "AUvmAAIjcDEwODcwMWRlYmFmMjY0YjY4YWJmOGJkYmEwZDA2NTkwMnAxMA";
+                
+                console.log(`Making Redis request: ${command}/${args.join('/')}`);
+                
+                const response = await fetch(`${UPSTASH_URL}/${command}/${args.join('/')}`, {
+                    headers: {
+                        Authorization: `Bearer ${UPSTASH_TOKEN}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error(`Redis request failed: ${response.statusText}`, errorText);
+                    throw new Error(`Redis request failed: ${response.statusText}`);
+                }
+                
+                return await response.json();
+            } catch (error) {
+                console.error("Redis request error:", error);
+                throw error;
+            }
+        }
+        
+        // Check Redis connection first
+        checkRedisConnection().then(isConnected => {
+            console.log('Redis connection check result:', isConnected);
+            if (!isConnected) {
+                console.warn('Redis connection failed, will use localStorage fallbacks');
+            }
+        });
+        
+        // Load initial user data from localStorage
+        function loadUserData() {
+            if (userData) {
+                // Set profile avatar initials
+                const initials = userData.firstName.charAt(0) + userData.lastName.charAt(0);
+                document.getElementById('profileInitials').textContent = initials;
+                
+                // Set profile name
+                document.getElementById('profileName').textContent = `${userData.firstName} ${userData.lastName}`;
+                
+                // Set profile phone
+                document.getElementById('profilePhone').textContent = userData.phone;
+                
+                // Set profile info values
+                document.getElementById('infoFirstName').textContent = userData.firstName;
+                document.getElementById('infoLastName').textContent = userData.lastName;
+                document.getElementById('infoPhone').textContent = userData.phone;
+
+                // Load balance and transactions
+                loadBalanceAndTransactions(userData.phone);
+            }
+        }
+
+        // Load balance and transactions
+        async function loadBalanceAndTransactions(phone) {
+            try {
+                // Load balance
+                const balanceResponse = await getUserBalance(phone);
+                if (balanceResponse.success) {
+                    document.getElementById('userBalance').textContent = formatRupiah(balanceResponse.balance);
+                }
+
+                // Load points
+                const pointsResponse = await getUserPoints(phone);
+                if (pointsResponse.success) {
+                    document.getElementById('userPoints').textContent = pointsResponse.points;
+                }
+
+                // Load transactions
+                const transactionsResponse = await getUserTransactions(phone);
+                if (transactionsResponse.success) {
+                    displayTransactions(transactionsResponse.transactions);
+                }
+                
+                // Load service history
+                const servicesResponse = await getUserServices(phone);
+                if (servicesResponse.success) {
+                    displayServices(servicesResponse.services);
+                }
+            } catch (error) {
+                console.error('Error loading balance and transactions:', error);
+            }
+        }
+
+        // Display transactions in the history section
+        function displayTransactions(transactions) {
+            const historyContainer = document.getElementById('transactionHistory');
+            historyContainer.innerHTML = transactions.length ? '' : '<div class="empty-message">Belum ada riwayat deposit</div>';
+
+            transactions.forEach(transaction => {
+                const item = document.createElement('div');
+                item.className = 'transaction-item';
+                item.setAttribute('data-order-id', transaction.orderId);
+                
+                const statusText = {
+                    'success': 'Berhasil',
+                    'pending': 'Menunggu',
+                    'failed': 'Gagal',
+                    'cancelled': 'Dibatalkan'
+                }[transaction.status] || transaction.status;
+                
+                // Safely format amount and date
+                let formattedAmount = 'Rp 0';
+                try {
+                    // Ensure amount is a number
+                    const numAmount = Number(transaction.amount);
+                    if (!isNaN(numAmount)) {
+                        formattedAmount = formatRupiah(numAmount);
+                    }
+                } catch (e) {
+                    console.error('Error formatting amount:', e);
+                }
+                
+                let formattedDate = 'Tanggal tidak tersedia';
+                try {
+                    // Ensure timestamp is valid
+                    const timestamp = new Date(transaction.timestamp);
+                    if (!isNaN(timestamp.getTime())) {
+                        formattedDate = timestamp.toLocaleString('id-ID');
+                    }
+                } catch (e) {
+                    console.error('Error formatting date:', e);
+                }
+                
+                // HTML for transaction info
+                let transactionHTML = `
+                    <div class="transaction-info">
+                        <div class="transaction-amount">${formattedAmount}</div>
+                        <div class="transaction-date">${formattedDate}</div>
+                    </div>
+                `;
+                
+                // Add cancel button for pending transactions
+                if (transaction.status === 'pending') {
+                    transactionHTML += `
+                        <div class="transaction-actions">
+                            <div class="transaction-status status-${transaction.status}">${statusText}</div>
+                            <button class="btn-cancel-transaction" onclick="handleCancelTransaction('${transaction.orderId}')">
+                                Batalkan
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    transactionHTML += `
+                        <div class="transaction-status status-${transaction.status}">${statusText}</div>
+                    `;
+                }
+                
+                item.innerHTML = transactionHTML;
+                historyContainer.appendChild(item);
+            });
+        }
+        
+        // Load user profile from Redis
+        async function loadUserProfile() {
+            try {
+                const profileResult = await getUserProfile(sessionId);
+                
+                if (profileResult.success) {
+                    // Update local storage with latest user data
+                    localStorage.setItem('bengkelUser', JSON.stringify(profileResult.user));
+                    
+                    // Format created date
+                    const createdDate = new Date(profileResult.user.created);
+                    const formattedDate = new Intl.DateTimeFormat('id-ID', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    }).format(createdDate);
+                    
+                    document.getElementById('infoCreated').textContent = formattedDate;
+                } else {
+                    // Session invalid, logout user
+                    logoutAction();
+                }
+            } catch (error) {
+                console.error('Error loading profile:', error);
+                // Don't auto-logout on error
+            }
+        }
+        
+        // Logout action
+        function logoutAction() {
+            localStorage.removeItem('bengkelSession');
+            localStorage.removeItem('bengkelUser');
+            localStorage.removeItem('bengkelSessionExpires');
+            window.location.href = 'login.html';
+        }
+        
+        // Handle menu navigation
+        const menuLinks = document.querySelectorAll('.profile-menu-link[data-tab]');
+        const tabContents = document.querySelectorAll('.profile-tab');
+        
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetTab = this.getAttribute('data-tab');
+                
+                // Remove active class from all links and tabs
+                menuLinks.forEach(item => item.classList.remove('active'));
+                tabContents.forEach(tab => tab.classList.remove('active'));
+                
+                // Add active class to clicked link and corresponding tab
+                this.classList.add('active');
+                document.getElementById(`${targetTab}-tab`).classList.add('active');
+            });
+        });
+        
+        // Handle logout buttons
+        document.getElementById('btnLogout').addEventListener('click', async function(e) {
+            e.preventDefault();
+            
+            try {
+                await logoutUser(sessionId);
+                logoutAction();
+            } catch (error) {
+                console.error('Logout error:', error);
+                logoutAction(); // Force logout even if API call fails
+            }
+        });
+        
+        document.getElementById('logoutBtn').addEventListener('click', async function() {
+            try {
+                await logoutUser(sessionId);
+                logoutAction();
+            } catch (error) {
+                console.error('Logout error:', error);
+                logoutAction(); // Force logout even if API call fails
+            }
+        });
+        
+        // Add Delete Account button listener
+        document.getElementById('deleteAccountBtn').addEventListener('click', function() {
+            openDeleteAccountModal();
+        });
+        
+        // Delete Account form submission
+        document.getElementById('deleteAccountForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('deleteAccountPassword').value;
+            
+            if (!password) {
+                alert('Harap masukkan password Anda.');
+                return;
+            }
+            
+            // Show confirmation dialog
+            if (!confirm('Anda yakin ingin menghapus akun? Tindakan ini tidak dapat dibatalkan.')) {
+                return;
+            }
+            
+            try {
+                const userData = JSON.parse(localStorage.getItem('bengkelUser'));
+                const sessionId = localStorage.getItem('bengkelSession');
+                
+                // Call deleteAccount function from auth.js
+                const result = await deleteAccount(userData.phone, password, sessionId);
+                
+                if (result.success) {
+                    // Clear all localStorage data related to this user
+                    localStorage.removeItem('bengkelSession');
+                    localStorage.removeItem('bengkelUser');
+                    localStorage.removeItem('bengkelSessionExpires');
+                    
+                    alert('Akun Anda telah berhasil dihapus.');
+                    // Redirect to home page
+                    window.location.href = 'index.html';
+                } else {
+                    alert(result.message || 'Gagal menghapus akun. Pastikan password Anda benar.');
+                }
+            } catch (error) {
+                console.error('Delete account error:', error);
+                alert('Terjadi kesalahan saat menghapus akun.');
+            }
+        });
+        
+        // Initialize page
+        loadUserData();
+        loadUserProfile();
+        
+        // Update navigation in all pages
+        updateNavigation();
+    });
+
+    // Deposit modal functions
+    function openDepositModal() {
+        document.getElementById('depositModal').style.display = 'block';
+    }
+
+    function closeDepositModal() {
+        document.getElementById('depositModal').style.display = 'none';
+    }
+
+    // Payment details modal functions
+    function openPaymentDetailsModal(amount, bonus, total) {
+        // Set payment amount
+        document.getElementById('paymentAmount').textContent = formatRupiah(amount);
+        
+        // Set transfer amount (total with bonus)
+        document.getElementById('transferAmount').textContent = formatRupiah(amount);
+        
+        // Set user ID
+        const userData = JSON.parse(localStorage.getItem('bengkelUser'));
+        if (userData && userData.uniqueId) {
+            document.getElementById('userId').textContent = userData.uniqueId;
+        } else {
+            document.getElementById('userId').textContent = 'ID tidak tersedia';
+        }
+        
+        // Create a pending transaction for this deposit
+        createPendingTransaction(userData.phone, amount);
+        
+        // Setup WhatsApp button
+        document.getElementById('sendProofBtn').onclick = function() {
+            const userId = userData.uniqueId || 'ID tidak tersedia';
+            const message = `Halo, saya ingin deposit dengan akun ID: #${userId} Sebesar ${formatRupiah(amount)}`;
+            const whatsappLink = `https://wa.me/6282246786617?text=${encodeURIComponent(message)}`;
+            window.open(whatsappLink, '_blank');
+        };
+        
+        // Show modal
+        document.getElementById('paymentDetailsModal').style.display = 'block';
+        closeDepositModal();
+    }
+
+    function closePaymentDetailsModal() {
+        document.getElementById('paymentDetailsModal').style.display = 'none';
+    }
+
+    // Calculate bonus based on deposit amount
+    function calculateBonus(amount) {
+        switch(amount) {
+            case 3000000: return 540000;
+            case 5000000: return 1000000;
+            case 10000000: return 2200000;
+            case 15000000: return 3600000;
+            case 20000000: return 5200000;
+            default: return 0;
+        }
+    }
+
+    // Get user transactions from Redis
+    async function getUserTransactions(phone) {
+        try {
+            console.log(`Getting transactions for user ${phone}`);
+            
+            // Try to get transactions list from Redis first
+            try {
+                const data = await redisRequest('get', [`user:${phone}:transactions`]);
+                
+                if (data.result) {
+                    try {
+                        const transactions = JSON.parse(data.result);
+                        if (Array.isArray(transactions) && transactions.length > 0) {
+                            console.log(`Found ${transactions.length} transactions in Redis`);
+                            
+                            return {
+                                success: true,
+                                transactions: transactions
+                            };
+                        }
+                    } catch (e) {
+                        console.error('Error parsing transactions from Redis:', e);
+                    }
+                }
+            } catch (redisError) {
+                console.error('Error fetching from Redis:', redisError);
+            }
+            
+            // If we didn't return above, check individual transaction keys as fallback
+            console.log('Trying to rebuild transaction list from individual keys...');
+            try {
+                const keys = await getTransactionKeys(phone);
+                
+                if (keys && keys.length > 0) {
+                    console.log(`Found ${keys.length} individual transaction keys`);
+                    const individualTransactions = await fetchIndividualTransactions(keys);
+                    
+                    if (individualTransactions.length > 0) {
+                        // Sort by timestamp, newest first
+                        individualTransactions.sort((a, b) => {
+                            return new Date(b.timestamp) - new Date(a.timestamp);
+                        });
+                        
+                        // Save as the main transactions list for future use
+                        await saveTransactionList(phone, individualTransactions);
+                        
+                        return {
+                            success: true,
+                            transactions: individualTransactions,
+                            source: 'individual'
+                        };
+                    }
+                }
+            } catch (keysError) {
+                console.error('Error rebuilding from keys:', keysError);
+            }
+            
+            // If all else fails, return empty array
+            return {
+                success: true,
+                transactions: [],
+                source: 'empty'
+            };
+        } catch (error) {
+            console.error('Get transactions error:', error);
+            
+            return {
+                success: false,
+                message: 'Error retrieving transactions'
+            };
+        }
+    }
+    
+    // Helper function to get all transaction keys for a user
+    async function getTransactionKeys(phone) {
+        try {
+            // Use scan command to find all keys matching the pattern
+            const scanData = await redisRequest('scan', [0, 'match', `transaction:${phone}:*`, 'count', 1000]);
+            
+            if (scanData.result && Array.isArray(scanData.result[1])) {
+                return scanData.result[1]; // Return the array of keys
+            }
+            
+            return [];
+        } catch (error) {
+            console.error('Error scanning transaction keys:', error);
+            return [];
+        }
+    }
+    
+    // Helper function to fetch all individual transactions
+    async function fetchIndividualTransactions(keys) {
+        const transactions = [];
+        
+        for (const key of keys) {
+            try {
+                const data = await redisRequest('get', [key]);
+                
+                if (data.result) {
+                    try {
+                        const transaction = JSON.parse(data.result);
+                        transactions.push(transaction);
+                    } catch (e) {
+                        console.error(`Error parsing transaction for key ${key}:`, e);
+                    }
+                }
+            } catch (error) {
+                console.error(`Error fetching transaction for key ${key}:`, error);
+            }
+        }
+        
+        return transactions;
+    }
+    
+    // Helper function to save the full transaction list
+    async function saveTransactionList(phone, transactions) {
+        try {
+            const userTransactionsKey = `transactions:${phone}`;
+            
+            // Use the same format as auth.js
+            await redisRequest('set', [userTransactionsKey, JSON.stringify(transactions)]);
+            
+            console.log('Transaction list saved successfully to Redis');
+            return true;
+        } catch (error) {
+            console.error('Error saving transaction list:', error);
+            return false;
+        }
+    }
+
+    // Handle deposit selection
+    function handleDeposit(amount) {
+        const bonus = calculateBonus(amount);
+        openPaymentDetailsModal(amount, bonus, amount + bonus);
+    }
+
+    // Handle transaction cancellation
+    async function handleCancelTransaction(orderId) {
+        if (!confirm('Apakah Anda yakin ingin membatalkan transaksi ini?')) {
+            return;
+        }
+
+        try {
+            // Get user data
+            const userData = JSON.parse(localStorage.getItem('bengkelUser'));
+            if (!userData || !userData.phone) {
+                console.error('User data not found');
+            return;
+        }
+
+            // Update UI first for better UX
+            const transactionElement = document.querySelector(`.transaction-item[data-order-id="${orderId}"]`);
+            if (transactionElement) {
+                const statusElement = transactionElement.querySelector('.transaction-status');
+                if (statusElement) {
+                    statusElement.textContent = 'Dibatalkan';
+                    statusElement.className = 'transaction-status status-cancelled';
+                }
+            }
+            
+            // 1. Update the specific transaction
+            try {
+                const transactionKey = `transaction:${userData.phone}:${orderId}`;
+                const response = await redisRequest('get', [transactionKey]);
+                
+                if (response.success && response.result) {
+                    try {
+                        const transaction = JSON.parse(response.result);
+                        transaction.status = 'cancelled';
+                        transaction.cancelledAt = new Date().toISOString();
+                        
+                        await redisRequest('set', [transactionKey, JSON.stringify(transaction)]);
+                        console.log('Individual transaction updated successfully');
+                    } catch (e) {
+                        console.error('Error parsing or updating individual transaction:', e);
+                    }
+                } else {
+                    console.warn('Individual transaction not found');
+                }
+            } catch (specificError) {
+                console.error('Error updating individual transaction:', specificError);
+            }
+            
+            // 2. Update in the transactions list
+            try {
+                const userTransactionsKey = `user:${userData.phone}:transactions`;
+                const response = await redisRequest('get', [userTransactionsKey]);
+                
+                if (response.success && response.result) {
+                    try {
+                        const transactions = JSON.parse(response.result);
+                        
+                        if (Array.isArray(transactions)) {
+                            const transactionIndex = transactions.findIndex(t => t.orderId === orderId);
+                            
+                            if (transactionIndex !== -1) {
+                                transactions[transactionIndex].status = 'cancelled';
+                                transactions[transactionIndex].cancelledAt = new Date().toISOString();
+                                
+                                await redisRequest('set', [userTransactionsKey, JSON.stringify(transactions)]);
+                                console.log('Transaction updated in list successfully');
+                            } else {
+                                console.warn('Transaction not found in list');
+                            }
+                        } else {
+                            console.error('Transactions data is not an array');
+                        }
+                    } catch (e) {
+                        console.error('Error parsing or updating transactions list:', e);
+                    }
+                } else {
+                    console.warn('Transactions list not found');
+                }
+            } catch (listError) {
+                console.error('Error updating transactions list:', listError);
+            }
+            
+            // 3. Update in global transactions list
+            try {
+                const globalKey = 'global:transactions';
+                const response = await redisRequest('get', [globalKey]);
+                
+                if (response.success && response.result) {
+                    try {
+                        const globalTransactions = JSON.parse(response.result);
+                        
+                        if (Array.isArray(globalTransactions)) {
+                            const transactionIndex = globalTransactions.findIndex(t => 
+                                t.orderId === orderId && t.userPhone === userData.phone
+                            );
+                            
+                            if (transactionIndex !== -1) {
+                                globalTransactions[transactionIndex].status = 'cancelled';
+                                globalTransactions[transactionIndex].cancelledAt = new Date().toISOString();
+                                
+                                await redisRequest('set', [globalKey, JSON.stringify(globalTransactions)]);
+                                console.log('Transaction updated in global list successfully');
+                            } else {
+                                console.warn('Transaction not found in global list');
+                            }
+                        } else {
+                            console.error('Global transactions data is not an array');
+                        }
+                    } catch (e) {
+                        console.error('Error parsing or updating global transactions list:', e);
+                    }
+                }
+            } catch (globalError) {
+                console.error('Error updating global transactions list:', globalError);
+            }
+            
+            alert('Transaksi berhasil dibatalkan');
+        } catch (error) {
+            console.error('Error cancelling transaction:', error);
+            alert('Gagal membatalkan transaksi. Silakan coba lagi.');
+        }
+    }
+
+    // Update transaction status in UI without reloading
+    function updateTransactionInUI(orderId, newStatus) {
+        const transactionItem = document.querySelector(`.transaction-item[data-order-id="${orderId}"]`);
+        if (!transactionItem) return;
+        
+        const statusElement = transactionItem.querySelector('.transaction-status');
+        const actionsElement = transactionItem.querySelector('.transaction-actions');
+        
+        if (statusElement) {
+            // Remove old status class
+            statusElement.classList.forEach(cls => {
+                if (cls.startsWith('status-')) {
+                    statusElement.classList.remove(cls);
+                }
+            });
+            
+            // Add new status class
+            statusElement.classList.add(`status-${newStatus}`);
+            
+            // Update status text
+            const statusText = {
+                'success': 'Berhasil',
+                'pending': 'Menunggu',
+                'failed': 'Gagal',
+                'cancelled': 'Dibatalkan'
+            }[newStatus] || newStatus;
+            
+            statusElement.textContent = statusText;
+        }
+        
+        // Remove cancel button if status is not pending
+        if (newStatus !== 'pending' && actionsElement) {
+            const newStatusElement = document.createElement('div');
+            newStatusElement.className = `transaction-status status-${newStatus}`;
+            newStatusElement.textContent = {
+                'success': 'Berhasil',
+                'pending': 'Menunggu',
+                'failed': 'Gagal',
+                'cancelled': 'Dibatalkan'
+            }[newStatus] || newStatus;
+            
+            actionsElement.parentNode.replaceChild(newStatusElement, actionsElement);
+        }
+    }
+    
+    // Helper function to generate a unique order ID
+    function generateOrderId() {
+        const timestamp = new Date().getTime();
+        const random = Math.floor(Math.random() * 1000);
+        return `ORDER-${timestamp}-${random}`;
+    }
+    
+    // Check Redis connection health
+    async function checkRedisConnection() {
+        try {
+            // Try a simple ping command to check connection
+            const data = await redisRequest('ping', []);
+            console.log('Redis connection health check:', data);
+            return data.result === 'PONG';
+        } catch (error) {
+            console.error('Redis connection check error:', error);
+            return false;
+        }
+    }
+
+    // Get user balance from Redis
+    async function getUserBalance(phone) {
+        try {
+            const balanceKey = `user:${phone}:balance`;
+            const data = await redisRequest('get', [balanceKey]);
+            
+            let balance = 0;
+            if (data.result) {
+                balance = parseInt(data.result) || 0;
+            }
+            
+            return {
+                success: true,
+                balance: balance
+            };
+        } catch (error) {
+            console.error('Get balance error:', error);
+            return {
+                success: false,
+                balance: 0,
+                error: error.message
+            };
+        }
+    }
+
+    // Get user points from Redis
+    async function getUserPoints(phone) {
+        try {
+            const pointsKey = `user:${phone}:points`;
+            const data = await redisRequest('get', [pointsKey]);
+            
+            let points = 0;
+            if (data.result) {
+                points = parseInt(data.result) || 0;
+            }
+            
+            return {
+                success: true,
+                points: points
+            };
+        } catch (error) {
+            console.error('Get points error:', error);
+            return {
+                success: false,
+                points: 0,
+                error: error.message
+            };
+        }
+    }
+
+    // Close modals when clicking outside
+    window.onclick = function(event) {
+        const depositModal = document.getElementById('depositModal');
+        const paymentDetailsModal = document.getElementById('paymentDetailsModal');
+        const deleteAccountModal = document.getElementById('deleteAccountModal');
+        
+        if (event.target === depositModal) {
+            closeDepositModal();
+        }
+        
+        if (event.target === paymentDetailsModal) {
+            closePaymentDetailsModal();
+        }
+        
+        if (event.target === deleteAccountModal) {
+            closeDeleteAccountModal();
+        }
+    }
+
+    // Helper function to format currency
+    function formatRupiah(amount) {
+        try {
+            // Make sure amount is a number
+            const numAmount = Number(amount);
+            if (isNaN(numAmount)) {
+                return 'Rp 0';
+            }
+            
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(numAmount);
+        } catch (e) {
+            console.error('Error in formatRupiah:', e);
+            return 'Rp 0';
+        }
+    }
+
+    // Delete Account Modal Functions
+    function openDeleteAccountModal() {
+        document.getElementById('deleteAccountModal').style.display = 'block';
+        document.getElementById('deleteAccountPassword').value = '';
+    }
+    
+    function closeDeleteAccountModal() {
+        document.getElementById('deleteAccountModal').style.display = 'none';
+    }
+
+    // Create a pending transaction and save to Redis
+    async function createPendingTransaction(phone, amount) {
+        try {
+            const orderId = generateOrderId();
+            const userData = JSON.parse(localStorage.getItem('bengkelUser'));
+            
+            // Validate amount is a number
+            let numAmount = 0;
+            try {
+                numAmount = Number(amount);
+                if (isNaN(numAmount)) {
+                    numAmount = 0;
+                }
+            } catch (e) {
+                console.error('Invalid amount:', e);
+            }
+            
+            // Create transaction object with unique ID with timestamp
+            const transaction = {
+                orderId: orderId,
+                transactionId: `TX-${Date.now()}-${Math.floor(Math.random() * 10000)}`,
+                userId: userData.uniqueId || 'unknown',
+                userPhone: phone,
+                userName: `${userData.firstName} ${userData.lastName}`,
+                amount: numAmount,
+                timestamp: new Date().toISOString(),
+                status: 'pending',
+                type: 'deposit',
+                bonusAmount: calculateBonus(numAmount)
+            };
+            
+            // First add transaction to UI immediately
+            addTransactionToUI(transaction);
+            
+            // 1. Save individual transaction for easy access
+            try {
+                const specificTransactionKey = `transaction:${phone}:${orderId}`;
+                console.log('Saving individual transaction to Redis key:', specificTransactionKey);
+                
+                await redisRequest('set', [specificTransactionKey, JSON.stringify(transaction)]);
+                console.log('Individual transaction saved successfully to Redis');
+            } catch (specificError) {
+                console.error('Error saving individual transaction to Redis:', specificError);
+            }
+            
+            // 2. Save to main transactions list
+            try {
+                // Get existing transactions from Redis
+                const userTransactionsKey = `user:${phone}:transactions`;
+                const data = await redisRequest('get', [userTransactionsKey]);
+                
+                // Parse existing transactions or create new array
+                let transactions = [];
+                if (data.result) {
+                    try {
+                        transactions = JSON.parse(data.result);
+                        if (!Array.isArray(transactions)) {
+                            console.warn('Data from Redis is not an array, creating new array');
+                            transactions = [];
+                        }
+                    } catch (e) {
+                        console.error('Error parsing transactions, creating new array', e);
+                        transactions = [];
+                    }
+                }
+                
+                // Add new transaction to beginning of array
+                transactions.unshift(transaction);
+                
+                // Save updated transactions to Redis
+                console.log('Saving transactions to Redis:', transactions);
+                
+                await redisRequest('set', [userTransactionsKey, JSON.stringify(transactions)]);
+                console.log('Transaction list saved successfully to Redis');
+                
+                // 3. Also save to global transactions list
+                saveToGlobalTransactions(transaction);
+            } catch (error) {
+                console.error('Error saving transaction to Redis:', error);
+            }
+            
+            return transaction;
+        } catch (error) {
+            console.error('Error in createPendingTransaction:', error);
+            return null;
+        }
+    }
+    
+    // Save transaction to global transactions list
+    async function saveToGlobalTransactions(transaction) {
+        try {
+            // Get existing global transactions
+            const globalKey = 'global:transactions';
+            const data = await redisRequest('get', [globalKey]);
+            
+            // Parse existing global transactions or create new array
+            let globalTransactions = [];
+            if (data.result) {
+                try {
+                    globalTransactions = JSON.parse(data.result);
+                    if (!Array.isArray(globalTransactions)) {
+                        globalTransactions = [];
+                    }
+                } catch (e) {
+                    console.error('Error parsing global transactions, creating new array', e);
+                    globalTransactions = [];
+                }
+            }
+            
+            // Add new transaction to beginning of array
+            globalTransactions.unshift(transaction);
+            
+            // Save updated global transactions to Redis
+            await redisRequest('set', [globalKey, JSON.stringify(globalTransactions)]);
+            console.log('Transaction saved successfully to global transactions');
+        } catch (error) {
+            console.error('Error saving to global transactions:', error);
+        }
+    }
+    
+    // Add a single transaction to the UI
+    function addTransactionToUI(transaction) {
+        const historyContainer = document.getElementById('transactionHistory');
+        
+        // Clear empty message if it exists
+        const emptyMessage = historyContainer.querySelector('.empty-message');
+        if (emptyMessage) {
+            historyContainer.innerHTML = '';
+        }
+        
+        const item = document.createElement('div');
+        item.className = 'transaction-item';
+        item.setAttribute('data-order-id', transaction.orderId);
+        
+        const statusText = {
+            'success': 'Berhasil',
+            'pending': 'Menunggu',
+            'failed': 'Gagal',
+            'cancelled': 'Dibatalkan'
+        }[transaction.status] || transaction.status;
+        
+        // Safely format amount and date
+        let formattedAmount = 'Rp 0';
+        try {
+            // Ensure amount is a number
+            const numAmount = Number(transaction.amount);
+            if (!isNaN(numAmount)) {
+                formattedAmount = formatRupiah(numAmount);
+            }
+        } catch (e) {
+            console.error('Error formatting amount:', e);
+        }
+        
+        let formattedDate = 'Tanggal tidak tersedia';
+        try {
+            // Ensure timestamp is valid
+            const timestamp = new Date(transaction.timestamp);
+            if (!isNaN(timestamp.getTime())) {
+                formattedDate = timestamp.toLocaleString('id-ID');
+            }
+        } catch (e) {
+            console.error('Error formatting date:', e);
+        }
+        
+        // HTML for transaction info
+        let transactionHTML = `
+            <div class="transaction-info">
+                <div class="transaction-amount">${formattedAmount}</div>
+                <div class="transaction-date">${formattedDate}</div>
+            </div>
+        `;
+        
+        // Add cancel button for pending transactions
+        if (transaction.status === 'pending') {
+            transactionHTML += `
+                <div class="transaction-actions">
+                    <div class="transaction-status status-${transaction.status}">${statusText}</div>
+                    <button class="btn-cancel-transaction" onclick="handleCancelTransaction('${transaction.orderId}')">
+                        Batalkan
+                    </button>
+                </div>
+            `;
+        } else {
+            transactionHTML += `
+                <div class="transaction-status status-${transaction.status}">${statusText}</div>
+            `;
+        }
+        
+        item.innerHTML = transactionHTML;
+        
+        // Insert at the beginning of the list
+        if (historyContainer.firstChild) {
+            historyContainer.insertBefore(item, historyContainer.firstChild);
+        } else {
+            historyContainer.appendChild(item);
+        }
+    }
+
+    // Get user services from Redis
+    async function getUserServices(phone) {
+        try {
+            const servicesKey = `user:${phone}:services`;
+            const data = await redisRequest('get', [servicesKey]);
+            
+            let services = [];
+            if (data.success && data.result) {
+                try {
+                    services = JSON.parse(data.result);
+                    if (!Array.isArray(services)) {
+                        services = [];
+                    }
+                } catch (e) {
+                    console.error('Error parsing services:', e);
+                }
+            }
+            
+            return {
+                success: true,
+                services: services
+            };
+        } catch (error) {
+            console.error('Get services error:', error);
+            return {
+                success: false,
+                services: [],
+                error: error.message
+            };
+        }
+    }
+
+    // Display services in the history section
+    function displayServices(services) {
+        // Add a service history section to the profile page if it doesn't exist
+        let serviceHistorySection = document.getElementById('serviceHistory');
+        
+        if (!serviceHistorySection) {
+            // Create the service history section
+            const profileContent = document.querySelector('.profile-content');
+            
+            const serviceHistoryHTML = `
+                <div class="profile-section-title">Riwayat Servis</div>
+                <div id="serviceHistory" class="service-history-container"></div>
+            `;
+            
+            // Insert after transaction history
+            const transactionHistory = document.getElementById('transactionHistory');
+            if (transactionHistory && transactionHistory.parentNode) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'profile-section';
+                wrapper.innerHTML = serviceHistoryHTML;
+                transactionHistory.parentNode.parentNode.insertAdjacentElement('afterend', wrapper);
+            } else {
+                // Fallback if transaction history not found
+                profileContent.insertAdjacentHTML('beforeend', `
+                    <div class="profile-section">
+                        ${serviceHistoryHTML}
+                    </div>
+                `);
+            }
+            
+            serviceHistorySection = document.getElementById('serviceHistory');
+        }
+        
+        // Display services
+        serviceHistorySection.innerHTML = services.length ? '' : '<div class="empty-message">Belum ada riwayat servis</div>';
+        
+        services.forEach(service => {
+            const item = document.createElement('div');
+            item.className = 'service-history-item';
+            
+            // Safely format date
+            let formattedDate = 'Tanggal tidak tersedia';
+            try {
+                // Ensure timestamp is valid
+                const timestamp = new Date(service.timestamp);
+                if (!isNaN(timestamp.getTime())) {
+                    formattedDate = timestamp.toLocaleString('id-ID');
+                }
+            } catch (e) {
+                console.error('Error formatting date:', e);
+            }
+            
+            item.innerHTML = `
+                <div class="service-date">${formattedDate}</div>
+                <div class="service-description">${service.description || 'Tidak ada deskripsi'}</div>
+                <div class="service-price-points">
+                    <span class="service-price">${formatRupiah(service.price || 0)}</span>
+                    <span class="service-points">+${service.points || 0} Poin</span>
+                </div>
+            `;
+            
+            serviceHistorySection.appendChild(item);
+        });
+    }
+    </script>
+</body>
+</html>

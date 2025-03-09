@@ -1,0 +1,12 @@
+{
+  "name": "web-bengkel",
+  "version": "1.0.0",
+  "description": "Bengkel website",
+  "scripts": {
+    "start": "serve .",
+    "build": "echo 'Static site - no build required'"
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
+  }
+} 

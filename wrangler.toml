@@ -1,0 +1,7 @@
+[build]
+command = "npm install --no-package-lock && npm run build"
+upload.format = "directory"
+upload.dir = "."
+
+[build.environment]
+NODE_VERSION = "18" 

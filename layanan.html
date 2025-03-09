@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layanan - Bengkel Aseng Ketok</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-main">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="images/logo-removebg-preview.png.png" alt="Logo Bengkel" class="logo-img">
+                    <h1>Bengkel Aseng Ketok</h1>
+                </div>
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="nav-main">
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="layanan.html" class="active">Layanan</a></li>
+                        <li><a href="tentang.html">Tentang</a></li>
+                        <li><a href="kontak.html">Kontak</a></li>
+                        <li><a href="https://wa.me/6282246786617" class="btn-booking">Booking Sekarang</a></li>
+                        <li><a href="login.html" class="btn-login">Log in</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <a href="javascript:history.back()" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
+            <h1 class="page-title">Layanan Kami</h1>
+            <p class="page-subtitle">Solusi Lengkap untuk Perawatan Kendaraan Anda</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <div class="services-categories">
+                <button class="category-btn active" data-category="all">Semua Layanan</button>
+                <button class="category-btn" data-category="body">Body & Cat</button>
+                <button class="category-btn" data-category="mesin">Mesin</button>
+                <button class="category-btn" data-category="ac">AC & Interior</button>
+            </div>
+
+            <div class="services-grid">
+                <!-- Ketok Magic -->
+                <div class="service-card" data-category="body">
+                    <div class="service-icon">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <h3>Ketok Magic</h3>
+                    <p>Perbaikan body mobil tanpa perlu pengecatan ulang. Ideal untuk kerusakan ringan seperti penyok dan lecet.</p>
+                    <a href="https://wa.me/6282246786617" class="btn-service">Booking Sekarang</a>
+                </div>
+
+                <!-- Las -->
+                <div class="service-card" data-category="body">
+                    <div class="service-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>Las</h3>
+                    <p>Perbaikan struktur body mobil dengan pengelasan presisi tinggi untuk kerusakan yang memerlukan penyambungan atau penguatan.</p>
+                    <a href="https://wa.me/6282246786617" class="btn-service">Booking Sekarang</a>
+                </div>
+
+                <!-- Cat -->
+                <div class="service-card" data-category="body">
+                    <div class="service-icon">
+                        <i class="fas fa-spray-can"></i>
+                    </div>
+                    <h3>Cat</h3>
+                    <p>Pengecatan mobil profesional dengan hasil yang halus dan tahan lama, tersedia berbagai pilihan warna dan jenis cat.</p>
+                    <a href="https://wa.me/6282246786617" class="btn-service">Booking Sekarang</a>
+                </div>
+
+                <!-- Salon Body -->
+                <div class="service-card" data-category="body">
+                    <div class="service-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Salon Body</h3>
+                    <p>Perawatan menyeluruh untuk eksterior mobil, termasuk poles, wax, dan pembersihan mendalam untuk tampilan maksimal.</p>
+                    <a href="https://wa.me/6282246786617" class="btn-service">Booking Sekarang</a>
+                </div>
+
+                <!-- Coating -->
+                <div class="service-card" data-category="body">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Coating</h3>
+                    <p>Perlindungan cat mobil premium dengan teknologi nano-coating untuk ketahanan maksimal terhadap cuaca dan goresan.</p>
+                    <a href="https://wa.me/6282246786617" class="btn-service">Booking Sekarang</a>
+                </div>
+
+                <!-- Mesin dan Kaki Mobil -->
+                <div class="service-card" data-category="mesin">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Mesin dan Kaki Mobil</h3>
+                    <p>Perbaikan dan perawatan komprehensif untuk mesin dan sistem suspensi mobil Anda.</p>
+                    <a href="https://wa.me/6282246786617" class="btn-service">Booking Sekarang</a>
+                </div>
+
+                <!-- AC -->
+                <div class="service-card" data-category="ac">
+                    <div class="service-icon">
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                    <h3>AC</h3>
+                    <p>Servis dan perbaikan sistem AC mobil untuk kenyamanan berkendara optimal dalam segala cuaca.</p>
+                    <a href="https://wa.me/6282246786617" class="btn-service">Booking Sekarang</a>
+                </div>
+
+                <!-- Kaca Film -->
+                <div class="service-card" data-category="ac">
+                    <div class="service-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3>Kaca Film</h3>
+                    <p>Pemasangan kaca film berkualitas tinggi untuk perlindungan UV dan privasi maksimal.</p>
+                    <a href="https://wa.me/6282246786617" class="btn-service">Booking Sekarang</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing List Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">List Harga Jasa</h2>
+            <div class="pricing-table-wrapper">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Jenis Jasa</th>
+                            <th rowspan="2">Keterangan</th>
+                            <th colspan="2">Pricelist</th>
+                        </tr>
+                        <tr>
+                            <th>Standard</th>
+                            <th>Luxury</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Ketok Magic -->
+                        <tr>
+                            <td rowspan="3">Ketok Magic</td>
+                            <td>Body</td>
+                            <td>150.000 + 30.000/cm</td>
+                            <td>250.000 + 50.000/cm</td>
+                        </tr>
+                        <tr>
+                            <td>Tiang Atas dan Atap</td>
+                            <td>200.000 + 30.000/cm</td>
+                            <td>300.000 + 60.000/cm</td>
+                        </tr>
+                        <tr>
+                            <td>Tangga dan Tiang Pintu</td>
+                            <td>Tidak Tersedia</td>
+                            <td>Tidak tersedia</td>
+                        </tr>
+
+                        <!-- Las/Ketok -->
+                        <tr>
+                            <td rowspan="6">Las/Ketok</td>
+                            <td>Body</td>
+                            <td>50.000 + 15.000/cm</td>
+                            <td>100.000 + 30.000/cm</td>
+                        </tr>
+                        <tr>
+                            <td>Tiang, Atap, dan Tangga</td>
+                            <td>75.000 + 15.000/cm</td>
+                            <td>125.000 + 30.000/cm</td>
+                        </tr>
+                        <tr>
+                            <td>Las Kropos</td>
+                            <td>150.000 + 30.000/cm</td>
+                            <td>250.000 + 60.000/cm</td>
+                        </tr>
+                        <tr>
+                            <td>Pasang + Stel Bumper / Bodykit</td>
+                            <td>150.000/panel</td>
+                            <td>400.000/panel</td>
+                        </tr>
+                        <tr>
+                            <td>Angkat Body</td>
+                            <td colspan="2" style="text-align: center;">3.000.000</td>
+                        </tr>
+                        <tr>
+                            <td>Pemasangan Aksesoris Cakram</td>
+                            <td colspan="2" style="text-align: center;">50.000/ban</td>
+                        </tr>
+
+                        <!-- Press -->
+                        <tr>
+                            <td rowspan="8">Press</td>
+                            <td>Panel Kacamata</td>
+                            <td>700.000</td>
+                            <td>1.500.000</td>
+                        </tr>
+                        <tr>
+                            <td>Crossmember/Panel Bawah</td>
+                            <td>600.000</td>
+                            <td>1.200.000</td>
+                        </tr>
+                        <tr>
+                            <td>Tiang Pintu Dalam</td>
+                            <td>1.000.000</td>
+                            <td>2.200.000</td>
+                        </tr>
+                        <tr>
+                            <td>Afron</td>
+                            <td>700.000</td>
+                            <td>1.500.000</td>
+                        </tr>
+                        <tr>
+                            <td>Lantai</td>
+                            <td>1.200.000/titik (ringan)</td>
+                            <td>2.800.000/titik (ringan)</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>2.500.000/titik (berat)</td>
+                            <td>6.000.000/titik (berat)</td>
+                        </tr>
+                        <tr>
+                            <td>Chassis</td>
+                            <td>4.000.000 (ringan)</td>
+                            <td>8.500.000 (ringan)</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>7.500.000 (berat)</td>
+                            <td>20.000.000 (berat)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pricing-note">
+                    <p>Note : -Harga Standard untuk mobil dgn harga di bawah 1M (Patokan dari harga terbaru)</p>
+                    <p style="margin-left: 45px;">-Harga Luxury untuk mobil dgn harga di atas 1M (Patokan dari harga terbaru)</p>
+                </div>
+
+                <!-- Cat Body Table -->
+                <table class="pricing-table" style="margin-top: 2rem;">
+                    <thead>
+                        <tr>
+                            <th>Jenis Jasa</th>
+                            <th>Bagian</th>
+                            <th colspan="3">Pricelist (by Warranty)</th>
+                            <th>Keterangan</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2"></th>
+                            <th>Silver (1 Month)</th>
+                            <th>Gold (3 Month)</th>
+                            <th>Platinum (6 Month)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="29">Cat Body</td>
+                            <td>Bodykit</td>
+                            <td>350.000</td>
+                            <td>400.000</td>
+                            <td>500.000</td>
+                            <td rowspan="29">
+                                - Warna Merah Candy Full body ( + 3.000.000 )<br><br>
+                                - Warna merah Candy (+200.000 / panel)<br><br>
+                                - Korek Cat full Body /Dumpul Blok (+ 3.000.000)<br><br>
+                                - Korek Cat/ Dumpul blok  (+ 200.000/panel)<br><br>
+                                - Warna Merah Biasa, Orange, Kuning, Putih Mutiara Full Body (+ 1.500.000)<br><br>
+                                - Warna Merah Biasa, Orange, Kuning, Putih Mutiara ( + 100.000/panel)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Atap</td>
+                            <td>1.500.000</td>
+                            <td>1.700.000</td>
+                            <td>2.000.000</td>
+                        </tr>
+                        <tr>
+                            <td>Cover Spion</td>
+                            <td>150.000</td>
+                            <td>200.000</td>
+                            <td>300.000</td>
+                        </tr>
+                        <tr>
+                            <td>Wing Bagasi</td>
+                            <td>350.000</td>
+                            <td>400.000</td>
+                            <td>500.000</td>
+                        </tr>
+                        <tr>
+                            <td>Clear Lampu</td>
+                            <td>350.000</td>
+                            <td>400.000</td>
+                            <td>500.000</td>
+                        </tr>
+                        <tr>
+                            <td>Velg/pcs</td>
+                            <td>350.000</td>
+                            <td>400.000</td>
+                            <td>500.000</td>
+                        </tr>
+                        <tr>
+                            <td>Anti Karat Kolong</td>
+                            <td colspan="3" style="text-align: center;">1.500.000</td>
+                        </tr>
+                        <tr>
+                            <td>Plingcoat Lantai Dalam</td>
+                            <td colspan="3" style="text-align: center;">1.000.000</td>
+                        </tr>
+                        <tr>
+                            <td>Dodol + Cat</td>
+                            <td>500.000</td>
+                            <td>600.000</td>
+                            <td>700.000</td>
+                        </tr>
+                        <tr>
+                            <td>Cover Power Window</td>
+                            <td>150.000</td>
+                            <td>200.000</td>
+                            <td>300.000</td>
+                        </tr>
+                        <tr>
+                            <td>Doortrim</td>
+                            <td colspan="3" style="text-align: center;">350.000</td>
+                        </tr>
+                        <tr>
+                            <td> Sisip Pijakan Kaki Dalam</td>
+                            <td>200.000</td>
+                            <td>250.000</td>
+                            <td>300.000</td>
+                        </tr>
+                        <tr>
+                            <td>Cat Full Body Small</td>
+                            <td>10.000.000</td>
+                            <td>12.000.000</td>
+                            <td>14.000.000</td>
+                        </tr>
+                         <tr>
+                            <td>Cat Full Body Large</td>
+                            <td>12.000.000</td>
+                            <td>15.000.000</td>
+                            <td>18.000.000</td>
+                        </tr>
+                         <tr>
+                            <td>Cat Full Body Luxury</td>
+                            <td>16.000.000</td>
+                            <td>19.000.000</td>
+                            <td>23.000.000</td>
+                        </tr>
+                        <tr>
+                            <td>Fender</td>
+                            <td>700.000</td>
+                            <td>800.000</td>
+                            <td>1.000.000</td>
+                        </tr>
+                        <tr>
+                            <td>Pintu</td>
+                            <td>700.000</td>
+                            <td>800.000</td>
+                            <td>1.000.000</td>
+                        </tr>
+                        <tr>
+                            <td>Kap Mesin</td>
+                            <td>700.000</td>
+                            <td>800.000</td>
+                            <td>1.000.000</td>
+                        </tr>
+                        <tr>
+                            <td>Bagasi</td>
+                            <td>700.000</td>
+                            <td>800.000</td>
+                            <td>1.000.000</td>
+                        </tr>
+                        <tr>
+                            <td>Qpanel</td>
+                            <td>700.000</td>
+                            <td>800.000</td>
+                            <td>1.000.000</td>
+                        </tr>
+                        <tr>
+                            <td>Tangga</td>
+                            <td>700.000</td>
+                            <td>800.000</td>
+                            <td>1.000.000</td>
+                        </tr>
+                        <tr>
+                            <td>Tiang Atas</td>
+                            <td>700.000</td>
+                            <td>800.000</td>
+                            <td>1.000.000</td>
+                        </tr>
+                         <tr>
+                            <td>Panel Kacamata</td>
+                            <td>350.000</td>
+                            <td>400.000</td>
+                            <td>500.000</td>
+                        </tr>
+                         <tr>
+                            <td>Afron</td>
+                            <td>350.000</td>
+                            <td>400.000</td>
+                            <td>500.000</td>
+                        </tr>
+                        <tr>
+                            <td>Cross Member</td>
+                            <td>350.000</td>
+                            <td>400.000</td>
+                            <td>500.000</td>
+                        </tr>
+                        <tr>
+                            <td>List Pintu</td>
+                            <td>150.000</td>
+                            <td>200.000</td>
+                            <td>300.000</td>
+                        </tr>
+                        <tr>
+                            <td>Tapak Spion</td>
+                            <td colspan="3" style="text-align: center;">150.000</td>
+                        </tr>
+                        <tr>
+                            <td>Dashboard</td>
+                            <td colspan="3" style="text-align: center;">700.000</td>
+                        </tr>
+                        <tr>
+                            <td>Tiang Pintu</td>
+                            <td>700.000</td>
+                            <td>800.000</td>
+                            <td>1.000.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- List Harga Mesin Table -->
+                <table class="pricing-table" style="margin-top: 2rem;">
+                    <thead>
+                        <tr>
+                            <th colspan="3">List Harga Mesin</th>
+                        </tr>
+                        <tr>
+                            <th colspan="3" style="font-size: 0.9em;">Khusus unit 1.500 kebawah</th>
+                        </tr>
+                        <tr>
+                            <th>No</th>
+                            <th>Keterangan</th>
+                            <th>Harga</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Service berkala + cuci injektor</td><td>Rp 350.000</td></tr>
+                        <tr><td>2</td><td>Periksa/service berkala (throtle body tidak dibuka)</td><td>Rp 300.000</td></tr>
+                        <tr><td>3</td><td>Tune Up</td><td>Rp 325.000</td></tr>
+                        <tr><td>4</td><td>Periksa spatu rem/ban</td><td>Rp 70.000</td></tr>
+                        <tr><td>5</td><td>Ganti spatu rem depan/ban</td><td>Rp 100.000</td></tr>
+                        <tr><td>6</td><td>Ganti spatu rem belakang/ban</td><td>Rp 175.000</td></tr>
+                        <tr><td>7</td><td>Periksa kaki" depan</td><td>Rp 150.000</td></tr>
+                        <tr><td>8</td><td>Periksa kaki" belakang</td><td>Rp 100.000</td></tr>
+                        <tr><td>9</td><td>Ganti oli matic</td><td>Rp 150.000</td></tr>
+                        <tr><td>11</td><td>Ganti shock breaker depan/ban</td><td>Rp 200.000</td></tr>
+                        <tr><td>12</td><td>Ganti shock breaker belakang/ban</td><td>Rp 150.000</td></tr>
+                        <tr><td>13</td><td>Bongkar-pasang kondensor AC</td><td>Rp 150.000</td></tr>
+                        <tr><td>15</td><td>Ganti karet stabil R/L</td><td>Rp 150.000</td></tr>
+                        <tr><td>16</td><td>Bongkar-pasang compressor AC</td><td>Rp 250.000</td></tr>
+                        <tr><td>17</td><td>Bongkar-pasang radiator</td><td>Rp 200.000</td></tr>
+                        <tr><td>18</td><td>Bongkar-pasang dinamo cas</td><td>Rp 200.000</td></tr>
+                        <tr><td>19</td><td>Bongkar-pasang tali kipas/belting</td><td>Rp 150.000</td></tr>
+                        <tr><td>20</td><td>Bongkar-pasang packing tutup klep</td><td>Rp 200.000</td></tr>
+                        <tr><td>21</td><td>Bongkar-pasang thermostat</td><td>Rp 200.000</td></tr>
+                        <tr><td>22</td><td>Bongkar-pasang cover timing</td><td>Rp 350.000</td></tr>
+                        <tr><td>23</td><td>Bongkar-pasang rack steer</td><td>Rp 350.000</td></tr>
+                        <tr><td>24</td><td>Bongkar-pasang rack steer + turun as pikul</td><td>Rp 400.000</td></tr>
+                        <tr><td>25</td><td>Bongkar-pasang seal kruk as depan</td><td>Rp 250.000</td></tr>
+                        <tr><td>26</td><td>Bongkar-pasang seal kruk as belakang</td><td>Rp 500.000</td></tr>
+                        <tr><td>27</td><td>Stell klep</td><td>Rp 250.000</td></tr>
+                        <tr><td>28</td><td>Bongkar-pasang pompa air</td><td>Rp 250.000</td></tr>
+                        <tr><td>29</td><td>Bongkar-pasang pompa power steering</td><td>Rp 250.000</td></tr>
+                        <tr><td>30</td><td>Bongkar-pasang engine mounting/pcs</td><td>Rp 200.000</td></tr>
+                        <tr><td>31</td><td>Bongkar-pasang bangku transmisi</td><td>Rp 200.000</td></tr>
+                        <tr><td>32</td><td>Bongkar-pasang CDI/distributor</td><td>Rp 200.000</td></tr>
+                        <tr><td>33</td><td>Bongkar-pasang transmisi</td><td>Rp 450.000</td></tr>
+                        <tr><td>34</td><td>Bongkar-pasang universal joint (silang4)/pcs</td><td>Rp 250.000</td></tr>
+                        <tr><td>35</td><td>Bongkar-pasang oli transmisi</td><td>Rp 150.000</td></tr>
+                        <tr><td>36</td><td>Bongkar-pasang oli gardan</td><td>Rp 150.000</td></tr>
+                        <tr><td>37</td><td>Bongkar-pasang seal gardan</td><td>Rp 200.000</td></tr>
+                        <tr><td>38</td><td>Bongkar-pasang lahar roda/ban</td><td>Rp 150.000</td></tr>
+                        <tr><td>39</td><td>Bongkar-pasang as tarik depan/ban</td><td>Rp 250.000</td></tr>
+                        <tr><td>40</td><td>Bongkar-pasang seal transmisi tarik dpn/ban</td><td>Rp 100.000</td></tr>
+                        <tr><td>41</td><td>Bongkar-pasang gardan</td><td>Rp 300.000</td></tr>
+                        <tr><td>42</td><td>Bongkar-pasang seal as roda belakang/ban</td><td>Rp 250.000</td></tr>
+                        <tr><td>43</td><td>Bongkar-pasang deksel</td><td>Rp 2.000.000</td></tr>
+                        <tr><td>44</td><td>Bongkar-pasang timing belt</td><td>Rp 450.000</td></tr>
+                        <tr><td>45</td><td>Bongkar-pasang rantai timing</td><td>Rp 700.000</td></tr>
+                        <tr><td>46</td><td>Turun matic</td><td>Rp 700.000</td></tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" style="text-align: left; padding-left: 20px;">
+                                Note: Untuk unit diatas 1500-2800 cc kecuali bongkar mesin = +100.000
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <!-- Additional Engine Pricing -->
+                <table class="pricing-table" style="margin-top: 1rem;">
+                    <tbody>
+                        <tr><td>1</td><td>Bongkar-pasang (Bongkar mesin)(Mobil tarik depan)</td><td>Rp 4.000.000</td></tr>
+                        <tr><td>2</td><td>Bongkar-pasang (Bongkar mesin)(Mobil tarik belakang)</td><td>Rp 3.500.000</td></tr>
+                        <tr><td>4</td><td>Turun transmisi Pajero Sport</td><td>Rp 600.000</td></tr>
+                        <tr><td>5</td><td>Turun transmisi Fortuner</td><td>Rp 600.000</td></tr>
+                        <tr><td>6</td><td>Bongkar mesin 2.000 CC ke atas</td><td>Rp 4.500.000</td></tr>
+                        <tr><td>7</td><td>Angkat deksel 2.000 CC ke atas</td><td>Rp 3.000.000</td></tr>
+                        <tr><td>8</td><td>Naik turun mesin 2.000 CC ke atas</td><td>Rp 2.000.000</td></tr>
+                    </tbody>
+                </table>
+
+                <!-- COLT DIESEL / CANTER Table -->
+                <table class="pricing-table" style="margin-top: 2rem;">
+                    <thead>
+                        <tr>
+                            <th colspan="3">COLT DIESEL / CANTER</th>
+                        </tr>
+                        <tr>
+                            <th>No</th>
+                            <th>Keterangan</th>
+                            <th>Harga</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Bongkar-pasang deksel</td><td>Rp 3.000.000</td></tr>
+                        <tr><td>2</td><td>Bongkar mesin</td><td>Rp 7.000.000</td></tr>
+                        <tr><td>3</td><td>Turun transmisi</td><td>Rp 1.000.000</td></tr>
+                        <tr><td>4</td><td>Ganti bos per/ban</td><td>Rp 250.000</td></tr>
+                        <tr><td>5</td><td>Periksa rem/ban</td><td>Rp 100.000</td></tr>
+                        <tr><td>6</td><td>Ganti spatu rem/ban</td><td>Rp 150.000</td></tr>
+                        <tr><td>7</td><td>Service berkala</td><td>Rp 350.000</td></tr>
+                        <tr><td>8</td><td>Service berkala + filter atas bawah</td><td>Rp 400.000</td></tr>
+                        <tr><td>9</td><td>Bongkar-pasang king pin/ban</td><td>Rp 250.000</td></tr>
+                        <tr><td>10</td><td>Bongkar-pasang per daun/bagian</td><td>Rp 250.000</td></tr>
+                        <tr><td>11</td><td>Service berkala + filter + cuci inter coler</td><td>Rp 450.000</td></tr>
+                        <tr><td>12</td><td>Ganti shock breaker/ban</td><td>Rp 150.000</td></tr>
+                        <tr><td>13</td><td>Pispot</td><td>Rp 200.000</td></tr>
+                        <tr><td>14</td><td>Bongkar-pasang scal as roda depan/ban</td><td>Rp 200.000</td></tr>
+                        <tr><td>15</td><td>Bongkar-pasang seal as roda belakang/ban</td><td>Rp 200.000</td></tr>
+                        <tr><td>16</td><td>Ganti spatu rem/ban</td><td>Rp 200.000</td></tr>
+                        <tr><td>17</td><td>Ganti as roda belakang/ban</td><td>Rp 250.000</td></tr>
+                        <tr><td>18</td><td>Stell rem/ban</td><td>Rp 150.000</td></tr>
+                        <tr><td>19</td><td>Ganti bohel per daun/bagian</td><td>Rp 200.000</td></tr>
+                        <tr><td>20</td><td>Ganti per daun/bagian</td><td>Rp 300.000</td></tr>
+                        <tr><td>21</td><td>Ganti dinamo cas</td><td>Rp 300.000</td></tr>
+                        <tr><td>22</td><td>Bongkar-pasang kompressor</td><td>Rp 300.000</td></tr>
+                        <tr><td>23</td><td>Bongkar-pasang radiator</td><td>Rp 300.000</td></tr>
+                        <tr><td>24</td><td>Ganti tali kipas</td><td>Rp 200.000</td></tr>
+                        <tr><td>25</td><td>Ganti pompa air</td><td>Rp 350.000</td></tr>
+                        <tr><td>26</td><td>Bongkar-pasang tutup klep</td><td>Rp 250.000</td></tr>
+                        <tr><td>27</td><td>Bongkar pump injection</td><td>Rp 700.000</td></tr>
+                        <tr><td>28</td><td>Ganti oli transmisi</td><td>Rp 150.000</td></tr>
+                        <tr><td>29</td><td>Ganti oli gardan</td><td>Rp 150.000</td></tr>
+                        <tr><td>30</td><td>Bongkar-pasang gardan</td><td>Rp 550.000</td></tr>
+                        <tr><td>31</td><td>Bongkar-pasang silang empat/pcs</td><td>Rp 200.000</td></tr>
+                        <tr><td>32</td><td>Periksa kaki - kaki</td><td>Rp 200.000</td></tr>
+                        <tr><td>33</td><td>Bongkar-pasang noodle</td><td>Rp 300.000</td></tr>
+                        <tr><td>34</td><td>Stell klep</td><td>Rp 300.000</td></tr>
+                        <tr><td>35</td><td>Stell timing</td><td>Rp 400.000</td></tr>
+                        <tr><td>36</td><td>Bongkar-pasang dinamo starter</td><td>Rp 250.000</td></tr>
+                        <tr><td>37</td><td>Bongkar-pasang turbo</td><td>Rp 300.000</td></tr>
+                        <tr><td>38</td><td>Bongkar-pasang inter cooler</td><td>Rp 300.000</td></tr>
+                        <tr><td>39</td><td>Bongkar-pasang seal kruk as belakang</td><td>Rp 950.000</td></tr>
+                        <tr><td>40</td><td>Naik turun mesin</td><td>Rp 3.500.000</td></tr>
+                        <tr><td>41</td><td>Bongkar pasang steer</td><td>Rp 300.000</td></tr>
+                        <tr><td>42</td><td>Bongkar-pasang seal kruk as depan</td><td>Rp 700.000</td></tr>
+                        <tr><td>43</td><td>Bongkar-pasang seal gardang</td><td>Rp 650.000</td></tr>
+                    </tbody>
+                </table>
+
+                <!-- Bongkar-Pasang Table with 10% Increased Prices -->
+                <table class="pricing-table" style="margin-top: 2rem;">
+                    <thead>
+                        <tr>
+                            <th colspan="4">Bongkar-Pasang</th>
+                        </tr>
+                        <tr>
+                            <th>No</th>
+                            <th>Keterangan</th>
+                            <th>Standard</th>
+                            <th>Luxury</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Bumper</td><td>Rp 300.000/psc</td><td>Rp 500.000/psc</td></tr>
+                        <tr><td>2</td><td>Body kit</td><td>Rp 150.000/psc</td><td>Rp 250.000/psc</td></tr>
+                        <tr><td>3</td><td>Cover column</td><td>Rp 75.000/psc</td><td>Rp 150.000/psc</td></tr>
+                        <tr><td>4</td><td>Wing bagasi</td><td>Rp 75.000/psc</td><td>Rp 150.000/psc</td></tr>
+                        <tr><td>5</td><td>Pemasangan sparepart body</td><td>Rp 50.000/psc</td><td>Rp 100.000/psc</td></tr>
+                        <tr><td>6</td><td>Bongkar-pasang kaca depan/belakang/panel</td><td>Rp 400.000/psc</td><td>Rp 800.000/psc</td></tr>
+                        <tr><td>7</td><td>Bongkar-pasang dashboard</td><td>Rp 250.000</td><td>Rp 500.000</td></tr>
+                        <tr><td>8</td><td>Bongkar-pasang kaca pintu</td><td>Rp 100.000/psc</td><td>Rp 200.000/psc</td></tr>
+                        <tr><td>9</td><td>Body part kategori ringan</td><td>Rp 50.000/psc</td><td>Rp 100.000/psc</td></tr>
+                        <tr><td>10</td><td>Body part kategori berat</td><td>Rp 100.000/psc</td><td>Rp 200.000/psc</td></tr>
+                        <tr><td>11</td><td>Plafon</td><td>Rp 300.000</td><td>Rp 700.000</td></tr>
+                        <tr><td>12</td><td>Interior kategori ringan</td><td>Rp 50.000/psc</td><td>Rp 100.000/psc</td></tr>
+                        <tr><td>13</td><td>Interior kategori berat</td><td>Rp 100.000/psc</td><td>Rp 200.000/psc</td></tr>
+                        <tr><td>14</td><td>Kompresor AC pemasangan</td><td>Rp 150.000/psc</td><td>Rp 400.000/psc</td></tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" style="text-align: left; padding-left: 20px;">
+                                Note: Standard untuk mobil dengan harga di bawah 1M, Luxury untuk mobil dengan harga di atas 1M
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <!-- Salon and Coating Services Table -->
+                <table class="pricing-table" style="margin-top: 2rem;">
+                    <thead>
+                        <tr>
+                            <th colspan="4">Salon dan Coating Services</th>
+                        </tr>
+                        <tr>
+                            <th>Jenis Layanan</th>
+                            <th>Small</th>
+                            <th>Large</th>
+                            <th>Luxury</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Salon Body Express</td>
+                            <td>Rp 600.000</td>
+                            <td>Rp 700.000</td>
+                            <td>Rp 800.000</td>
+                        </tr>
+                        <tr>
+                            <td>Salon Body Detailing</td>
+                            <td>Rp 800.000</td>
+                            <td>Rp 1.000.000</td>
+                            <td>Rp 1.500.000</td>
+                        </tr>
+                        <tr>
+                            <td>Salon Interior Express</td>
+                            <td>Rp 400.000</td>
+                            <td>Rp 500.000</td>
+                            <td>Rp 700.000</td>
+                        </tr>
+                        <tr>
+                            <td>Salon Interior Detailing</td>
+                            <td>Rp 700.000</td>
+                            <td>Rp 900.000</td>
+                            <td>Rp 1.200.000</td>
+                        </tr>
+                        <tr>
+                            <td>Coating (3 layers)</td>
+                            <td>Rp 3.000.000</td>
+                            <td>Rp 3.800.000</td>
+                            <td>Rp 5.000.000</td>
+                        </tr>
+                       
+                        <tr>
+                            <td colspan="4">Rabin Gores: Rp 75.000/panel</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Inspeksi Mobil Table -->
+                <table class="pricing-table" style="margin-top: 2rem;">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Jasa Inspeksi Mobil</th>
+                        </tr>
+                        <tr>
+                            <th>Kategori</th>
+                            <th>Harga</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Standart (Harga Mobil < 500.000.000)</td>
+                            <td>Rp 350.000</td>
+                        </tr>
+                        <tr>
+                            <td>Medium (Harga Mobil 500.000.000 - 1.000.000.000)</td>
+                            <td>Rp 450.000</td>
+                        </tr>
+                        <tr>
+                            <td>Luxury and Mobil Tua (Harga Mobil > 1.000.000.000 / Umur Mobil > 15 Tahun)</td>
+                            <td>Rp 600.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Butuh Konsultasi?</h2>
+                <p>Tim ahli kami siap membantu menyelesaikan masalah kendaraan Anda</p>
+                <div class="cta-buttons">
+                    <a href="kontak.html" class="btn-cta">Hubungi Kami</a>
+                    <a href="https://wa.me/6282246786617" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <img src="images/logo-removebg-preview.png.png" alt="Logo Bengkel" class="footer-logo">
+                    <p>Bengkel Aseng Ketok - Solusi terpercaya untuk perawatan dan perbaikan kendaraan Anda.</p>
+                </div>
+                <div class="footer-contact">
+                    <h3>Hubungi Kami</h3>
+                    <p><i class="fas fa-phone"></i> +62 82246786617</p>
+                    <p><i class="fas fa-map-marker-alt"></i> JL. Tuamang No.2B, Medan</p>
+                </div>
+                <div class="footer-hours">
+                    <h3>Jam Operasional</h3>
+                    <p>Senin-Sabtu: 8.30 - 17.30</p>
+                    <p>Minggu: Tutup</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Ikuti Kami</h3>
+                    <div class="social-links">
+                        <a href="https://www.tiktok.com/@asengmagic"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/aseng_ketok/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/6282246786617"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.youtube.com/@Aseng-Ketok/shorts"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bengkel Aseng Ketok. By Marvin Berlin.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+
+    <style>
+        @media screen and (max-width: 768px) {
+            .nav-main {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                padding: 0;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                z-index: 1000;
+                max-height: 0;
+                overflow: hidden;
+                transition: all 0.3s ease-in-out;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .menu-open .nav-main {
+                max-height: 500px;
+                padding: 1rem;
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-main ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                transform: translateY(-1rem);
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .menu-open .nav-main ul {
+                transform: translateY(0);
+            }
+
+            .nav-main ul li {
+                width: 100%;
+                text-align: center;
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: all 0.3s ease-in-out;
+            }
+
+            .menu-open .nav-main ul li {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .nav-main ul li:nth-child(1) { transition-delay: 0.1s; }
+            .nav-main ul li:nth-child(2) { transition-delay: 0.2s; }
+            .nav-main ul li:nth-child(3) { transition-delay: 0.3s; }
+            .nav-main ul li:nth-child(4) { transition-delay: 0.4s; }
+            .nav-main ul li:nth-child(5) { transition-delay: 0.5s; }
+            .nav-main ul li:nth-child(6) { transition-delay: 0.6s; }
+
+            .nav-main ul li a {
+                display: block;
+                padding: 0.8rem;
+            }
+
+            .btn-booking, .btn-login {
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</body>
+</html>

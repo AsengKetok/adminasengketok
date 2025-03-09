@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Bengkel Aseng Ketok</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional styles for login page */
+        .auth-section {
+            padding: 8rem 0;
+            background-color: #f7f9fc;
+            min-height: calc(100vh - 300px);
+            display: flex;
+            align-items: center;
+            background-image: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(52, 152, 219, 0.05) 100%);
+        }
+        
+        .auth-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            padding: 4rem;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--color-primary);
+        }
+        
+        .auth-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .form-tabs {
+            display: flex;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #eaedf3;
+            justify-content: center;
+        }
+        
+        .form-tab {
+            padding: 1.2rem 3rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #7a869a;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .form-tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--color-primary);
+            transition: width 0.3s ease;
+        }
+        
+        .form-tab:hover {
+            color: var(--color-primary);
+            background-color: rgba(255, 107, 53, 0.05);
+        }
+        
+        .form-tab.active {
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+        
+        .form-tab.active::after {
+            width: 100%;
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .auth-form h2 {
+            font-size: 2.8rem;
+            margin-bottom: 2.5rem;
+            color: #2d3748;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .form-group {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            font-size: 1.4rem;
+            color: #4a5568;
+            transition: color 0.3s ease;
+        }
+        
+        .form-group:focus-within .form-label {
+            color: var(--color-primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 1.4rem 1.8rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            background-color: #f8fafc;
+            color: #2d3748;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.15);
+            background-color: #fff;
+        }
+        
+        .form-control::placeholder {
+            color: #a0aec0;
+            font-size: 1.4rem;
+        }
+        
+        .btn-auth {
+            display: block;
+            width: 100%;
+            padding: 1.4rem;
+            background-color: var(--color-primary);
+            color: white;
+            font-weight: 700;
+            font-size: 1.6rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            margin-top: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.25);
+        }
+        
+        .btn-auth:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .btn-auth:hover {
+            background-color: var(--color-primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.35);
+        }
+        
+        .btn-auth:hover:before {
+            left: 100%;
+        }
+        
+        .forgot-password {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .forgot-password a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .forgot-password a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--color-primary);
+            transition: width 0.3s ease;
+        }
+        
+        .forgot-password a:hover {
+            color: var(--color-primary-dark);
+        }
+        
+        .forgot-password a:hover:after {
+            width: 100%;
+        }
+        
+        /* Form field icons */
+        .input-group {
+            position: relative;
+        }
+        
+        .input-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 15px;
+            color: #a0aec0;
+            font-size: 1.6rem;
+            transition: color 0.3s ease;
+        }
+        
+        .input-group .form-control {
+            padding-left: 45px;
+        }
+        
+        .input-group:focus-within .input-icon {
+            color: var(--color-primary);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .auth-container {
+                padding: 2.5rem;
+                margin: 0 2rem;
+            }
+            
+            .form-tab {
+                padding: 1rem 2rem;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-main">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="images/logo-removebg-preview.png.png" alt="Logo Bengkel" class="logo-img">
+                    <h1>Bengkel Aseng Ketok</h1>
+                </div>
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="nav-main">
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="layanan.html">Layanan</a></li>
+                        <li><a href="tentang.html">Tentang</a></li>
+                        <li><a href="kontak.html">Kontak</a></li>
+                        <li><a href="https://wa.me/6282246786617?text=Halo%20Bengkel%20Aseng%20Ketok%2C%20saya%20ingin%20booking%20servis." class="btn-booking">Booking Sekarang</a></li>
+                        <li><a href="login.html" class="btn-login active">Log in</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login/Signup Section -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="form-tabs">
+                    <button class="form-tab active" id="loginTab">Masuk</button>
+                    <button class="form-tab" id="signupTab">Daftar</button>
+                </div>
+                
+                <!-- Login Form -->
+                <form class="auth-form active" id="loginForm">
+                    <h2>Masuk ke Akun Anda</h2>
+                    <div class="form-group">
+                        <label for="loginPhone" class="form-label">Nomor Telepon</label>
+                        <div class="input-group">
+                            <i class="fas fa-phone input-icon"></i>
+                            <input type="tel" id="loginPhone" class="form-control" placeholder="+62 8xx xxxx xxxx" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword" class="form-label">Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="loginPassword" class="form-control" placeholder="Masukkan password Anda" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-auth">Masuk</button>
+                    <div class="forgot-password">
+                        <a href="#" id="forgotPassword">Lupa Password?</a>
+                    </div>
+                </form>
+                
+                <!-- Sign Up Form -->
+                <form class="auth-form" id="signupForm">
+                    <h2>Buat Akun Baru</h2>
+                    <div class="form-group">
+                        <label for="firstName" class="form-label">Nama Depan</label>
+                        <div class="input-group">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="firstName" class="form-control" placeholder="Masukkan nama depan" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName" class="form-label">Nama Belakang</label>
+                        <div class="input-group">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="lastName" class="form-control" placeholder="Masukkan nama belakang" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPhone" class="form-label">Nomor Telepon</label>
+                        <div class="input-group">
+                            <i class="fas fa-phone input-icon"></i>
+                            <input type="tel" id="signupPhone" class="form-control" placeholder="+62 8xx xxxx xxxx" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword" class="form-label">Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="signupPassword" class="form-control" placeholder="Buat password (min. 8 karakter)" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword" class="form-label">Konfirmasi Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-check-circle input-icon"></i>
+                            <input type="password" id="confirmPassword" class="form-control" placeholder="Masukkan kembali password Anda" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-auth">Daftar</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <img src="images/logo-removebg-preview.png.png" alt="Logo Bengkel" class="footer-logo">
+                    <p>Bengkel Aseng Ketok - Solusi terpercaya untuk perawatan dan perbaikan kendaraan Anda.</p>
+                </div>
+                <div class="footer-contact">
+                    <h3>Hubungi Kami</h3>
+                    <p><i class="fas fa-phone"></i> +62 82246786617</p>
+                    <p><i class="fas fa-map-marker-alt"></i> JL. Tuamang No.2B, Medan</p>
+                </div>
+                <div class="footer-hours">
+                    <h3>Jam Operasional</h3>
+                    <p>Senin-Sabtu: 8.30 - 17.30</p>
+                    <p>Minggu: Tutup</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Ikuti Kami</h3>
+                    <div class="social-links">
+                        <a href="https://www.tiktok.com/@asengmagic"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/aseng_ketok/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/6282246786617"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.youtube.com/@Aseng-Ketok/shorts"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bengkel Aseng Ketok. By Marvin Berlin.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Tab switching logic
+        const loginTab = document.getElementById('loginTab');
+        const signupTab = document.getElementById('signupTab');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        
+        // Phone input fields
+        const loginPhone = document.getElementById('loginPhone');
+        const signupPhone = document.getElementById('signupPhone');
+        
+        // Format Indonesian phone numbers (convert 0 to +62)
+        function formatIndonesianPhone(phone) {
+            if (!phone) return phone;
+            
+            // Remove any non-digit characters except +
+            phone = phone.replace(/[^\d+]/g, '');
+            
+            // If starts with 0, replace with +62
+            if (phone.startsWith('0')) {
+                return '+62' + phone.substring(1);
+            }
+            
+            // If doesn't have any prefix yet but has digits, add +62
+            if (!phone.startsWith('+') && phone.length > 0) {
+                if (phone.startsWith('62')) {
+                    return '+' + phone;
+                } else {
+                    return '+62' + phone;
+                }
+            }
+            
+            return phone;
+        }
+        
+        // Add blur event listeners to phone inputs for formatting
+        loginPhone.addEventListener('blur', function() {
+            this.value = formatIndonesianPhone(this.value);
+        });
+        
+        signupPhone.addEventListener('blur', function() {
+            this.value = formatIndonesianPhone(this.value);
+        });
+        
+        // Check if user is already logged in
+        if (isLoggedIn()) {
+            window.location.href = 'akun.html';
+            return;
+        }
+        
+        loginTab.addEventListener('click', function() {
+            loginTab.classList.add('active');
+            signupTab.classList.remove('active');
+            loginForm.classList.add('active');
+            signupForm.classList.remove('active');
+        });
+        
+        signupTab.addEventListener('click', function() {
+            signupTab.classList.add('active');
+            loginTab.classList.remove('active');
+            signupForm.classList.add('active');
+            loginForm.classList.remove('active');
+        });
+        
+        // Create message container for notification
+        const messageContainer = document.createElement('div');
+        messageContainer.style.padding = '15px';
+        messageContainer.style.margin = '20px 0';
+        messageContainer.style.borderRadius = '8px';
+        messageContainer.style.fontWeight = '600';
+        messageContainer.style.textAlign = 'center';
+        messageContainer.style.display = 'none';
+        
+        const authContainer = document.querySelector('.auth-container');
+        authContainer.insertBefore(messageContainer, authContainer.querySelector('.form-tabs'));
+        
+        // Show message helper
+        function showMessage(message, isSuccess) {
+            messageContainer.textContent = message;
+            messageContainer.style.backgroundColor = isSuccess ? '#d4edda' : '#f8d7da';
+            messageContainer.style.color = isSuccess ? '#155724' : '#721c24';
+            messageContainer.style.display = 'block';
+            
+            // Hide after 5 seconds
+            setTimeout(() => {
+                messageContainer.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Handle login form submission
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const phone = formatIndonesianPhone(document.getElementById('loginPhone').value);
+            const password = document.getElementById('loginPassword').value;
+            
+            // Form validation
+            if (!phone || !password) {
+                showMessage('Harap isi semua field', false);
+                return;
+            }
+            
+            // Disable submit button and show loading state
+            const submitBtn = loginForm.querySelector('.btn-auth');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Memproses...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Call login function from auth.js
+                const result = await loginUser(phone, password);
+                
+                if (result.success) {
+                    // Store session in localStorage
+                    localStorage.setItem('bengkelSession', result.session);
+                    localStorage.setItem('bengkelUser', JSON.stringify(result.user));
+                    
+                    showMessage(result.message, true);
+                    
+                    // Redirect to account page after a delay
+                    setTimeout(() => {
+                        window.location.href = 'akun.html';
+                    }, 1500);
+                } else {
+                    showMessage(result.message, false);
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showMessage('Terjadi kesalahan saat login', false);
+            } finally {
+                // Re-enable submit button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+        
+        // Handle signup form submission
+        signupForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const phone = formatIndonesianPhone(document.getElementById('signupPhone').value);
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Form validation
+            if (!firstName || !lastName || !phone || !password || !confirmPassword) {
+                showMessage('Harap isi semua field', false);
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showMessage('Password dan konfirmasi password tidak cocok', false);
+                return;
+            }
+            
+            if (password.length < 8) {
+                showMessage('Password harus minimal 8 karakter', false);
+                return;
+            }
+            
+            // Disable submit button and show loading state
+            const submitBtn = signupForm.querySelector('.btn-auth');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Memproses...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Call register function from auth.js
+                const result = await registerUser({
+                    firstName,
+                    lastName,
+                    phone,
+                    password
+                });
+                
+                if (result.success) {
+                    showMessage(result.message, true);
+                    
+                    // Reset form
+                    signupForm.reset();
+                    
+                    // Switch to login tab after successful registration
+                    setTimeout(() => {
+                        loginTab.click();
+                    }, 1500);
+                } else {
+                    showMessage(result.message, false);
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                showMessage('Terjadi kesalahan saat pendaftaran', false);
+            } finally {
+                // Re-enable submit button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+        
+        // Handle forgot password
+        document.getElementById('forgotPassword').addEventListener('click', function(e) {
+            e.preventDefault();
+            showMessage('Fitur lupa password sedang dalam pengembangan', false);
+        });
+    });
+    </script>
+</body>
+</html> 

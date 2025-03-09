@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami - Bengkel Aseng Ketok</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-main">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="images/logo-removebg-preview.png.png" alt="Logo Bengkel" class="logo-img">
+                    <h1>Bengkel Aseng Ketok</h1>
+                </div>
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="nav-main">
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="layanan.html">Layanan</a></li>
+                        <li><a href="tentang.html" class="active">Tentang</a></li>
+                        <li><a href="kontak.html">Kontak</a></li>
+                        <li><a href="https://wa.me/6282246786617" class="btn-booking">Booking Sekarang</a></li>
+                        <li><a href="login.html" class="btn-login">Log in</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <a href="javascript:history.back()" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
+            <h1 class="page-title">Tentang Kami</h1>
+            <p class="page-subtitle">Lebih dari 15 tahun melayani pelanggan dengan kualitas terbaik</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="images/tentang.jpg" alt="Bengkel Workshop" style="border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
+                </div>
+                <div class="about-content">
+                    <h2>Sejarah Kami</h2>
+                    <p>Bengkel Aseng Ketok didirikan pada tahun 2013 dengan visi menjadi bengkel terpercaya di Medan. Selama lebih dari 10 tahun, kami telah melayani ribuan pelanggan dengan standar kualitas tertinggi.</p>
+                    <p>Kami memiliki tim mekanik berpengalaman yang terus mengikuti perkembangan teknologi otomotif terbaru. Setiap anggota tim kami memiliki sertifikasi dan pelatihan khusus untuk memastikan kualitas layanan terbaik.</p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">10+</div>
+                            <div class="stat-label">Tahun Pengalaman</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">16000+</div>
+                            <div class="stat-label">Pelanggan Puas</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">20+</div>
+                            <div class="stat-label">Mekanik Ahli</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <h2 class="section-title">Nilai-Nilai Kami</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Kepuasan Pelanggan</h3>
+                    <p>Kami mengutamakan kepuasan pelanggan dengan memberikan layanan terbaik dan hasil yang memuaskan.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Kualitas Kerja</h3>
+                    <p>Setiap pekerjaan dilakukan dengan standar kualitas tinggi dan menggunakan peralatan modern.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Ketepatan Waktu</h3>
+                    <p>Kami berkomitmen untuk menyelesaikan pekerjaan sesuai dengan waktu yang dijanjikan.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Garansi Layanan</h3>
+                    <p>Kami memberikan garansi untuk setiap layanan sebagai bentuk tanggung jawab kami.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Tim Ahli Kami</h2>
+            <div class="team-slider-container">
+                <div class="team-grid" id="teamSlider">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="images/tim/ASENG.png" alt="Aseng">
+                        </div>
+                        <div class="team-info">
+                            <h3>Aseng</h3>
+                            <p class="team-role">Owner & Senior Technician</p>
+                            <p class="team-desc">Spesialis Ketok Magic dengan pengalaman lebih dari 40 tahun.</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="images/tim/HERMAN.png" alt="Herman">
+                        </div>
+                        <div class="team-info">
+                            <h3>Herman</h3>
+                            <p class="team-role">Senior Salon Dalam</p>
+                            <p class="team-desc">Ahli Dalam membersihkan interior.</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="images/tim/ADI.png" alt="ADI">
+                        </div>
+                        <div class="team-info">
+                            <h3>Adi</h3>
+                            <p class="team-role">Bongkar Pasang</p>
+                            <p class="team-desc">Bagian manapun bisa dibongkar mau itu apa pun.</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="images/tim/RICO.png" alt="Rico">
+                        </div>
+                        <div class="team-info">
+                            <h3>Rico</h3>
+                            <p class="team-role">Las Ketok</p>
+                            <p class="team-desc">Spesialis las dan ketok dengan berbagai skill.</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="images/tim/DANU.png" alt="Danu">
+                        </div>
+                        <div class="team-info">
+                            <h3>Danu</h3>
+                            <p class="team-role">Kutip</p>
+                            <p class="team-desc">Spesialis pembersihan cat dan finishing.</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="images/tim/ROMI.png" alt="Romi">
+                        </div>
+                        <div class="team-info">
+                            <h3>Romi</h3>
+                            <p class="team-role">Dempul</p>
+                            <p class="team-desc">Ahli dempul dan perbaikan bentuk body.</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="images/tim/AGUNG.png" alt="AGUNG">
+                        </div>
+                        <div class="team-info">
+                            <h3>Agung</h3>
+                            <p class="team-role">Technician</p>
+                            <p class="team-desc">Mekanik dengan berbagai skill.</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="images/tim/YUSUF.png" alt="Yusuf">
+                        </div>
+                        <div class="team-info">
+                            <h3>Yusuf</h3>
+                            <p class="team-role">Salon Body</p>
+                            <p class="team-desc">Ahli Dalam Membersihkan Eksterior Mobil.</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="images/tim/RYAN.png" alt="Ryan">
+                        </div>
+                        <div class="team-info">
+                            <h3>Ryan</h3>
+                            <p class="team-role">Coating</p>
+                            <p class="team-desc">Spesialis Coating dan detailing.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="slider-nav prev" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-nav next" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Siap untuk Service?</h2>
+                <p>Percayakan kendaraan Anda kepada tim ahli kami</p>
+                <div class="cta-buttons">
+                    <a href="https://wa.me/6282246786617" class="btn-cta">Booking Sekarang</a>
+                    <a href="https://wa.me/6282246786617" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <img src="images/logo-removebg-preview.png.png" alt="Logo Bengkel" class="footer-logo">
+                    <p>Bengkel Aseng Ketok - Solusi terpercaya untuk perawatan dan perbaikan kendaraan Anda.</p>
+                </div>
+                <div class="footer-contact">
+                    <h3>Hubungi Kami</h3>
+                    <p><i class="fas fa-phone"></i> +62 82246786617</p>
+                    <p><i class="fas fa-map-marker-alt"></i> JL. Tuamang No.2B, Medan</p>
+                </div>
+                <div class="footer-hours">
+                    <h3>Jam Operasional</h3>
+                    <p>Senin-Sabtu: 8.30 - 17.30</p>
+                    <p>Minggu: Tutup</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Ikuti Kami</h3>
+                    <div class="social-links">
+                        <a href="https://www.tiktok.com/@asengmagic"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/aseng_ketok/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/6282246786617"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.youtube.com/@Aseng-Ketok/shorts"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bengkel Aseng Ketok. By Marvin Berlin.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

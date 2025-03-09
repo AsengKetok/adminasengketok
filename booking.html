@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Service - Bengkel Aseng Ketok</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-main">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="images/logo-removebg-preview.png.png" alt="Logo Bengkel" class="logo-img">
+                    <h1>Bengkel Aseng Ketok</h1>
+                </div>
+                <nav class="nav-main">
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="layanan.html">Layanan</a></li>
+                        <li><a href="tentang.html">Tentang</a></li>
+                        <li><a href="kontak.html">Kontak</a></li>
+                        <li><a href="booking.html" class="btn-booking active">Booking Sekarang</a></li>
+                        <li><a href="login.html" class="btn-login">Log in</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <a href="javascript:history.back()" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
+            <h1 class="page-title">Booking Service</h1>
+            <p class="page-subtitle">Isi form di bawah untuk menjadwalkan service kendaraan Anda</p>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking-section">
+        <div class="container">
+            <div class="booking-grid">
+                <!-- Booking Form -->
+                <div class="booking-form">
+                    <form id="bookingForm">
+                        <!-- Personal Information -->
+                        <div class="form-section">
+                            <h3>Data Diri</h3>
+                            <div class="form-group">
+                                <label for="name" class="form-label">Nama Lengkap</label>
+                                <input type="text" id="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Nomor Telepon</label>
+                                <input type="tel" id="phone" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <!-- Vehicle Information -->
+                        <div class="form-section">
+                            <h3>Data Kendaraan</h3>
+                            <div class="form-group">
+                                <label for="carBrand" class="form-label">Merk Kendaraan</label>
+                                <input type="text" id="carBrand" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="carModel" class="form-label">Model Kendaraan</label>
+                                <input type="text" id="carModel" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="carYear" class="form-label">Tahun Kendaraan</label>
+                                <input type="number" id="carYear" class="form-control" min="1900" max="2024" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="plateNumber" class="form-label">Nomor Plat</label>
+                                <input type="text" id="plateNumber" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="carPrice" class="form-label">Harga Kendaraan</label>
+                                <select id="carPrice" class="form-control" required>
+                                    <option value="">Pilih Kategori Harga</option>
+                                    <option value="standard">Di bawah 1M (Standard)</option>
+                                    <option value="luxury">Di atas 1M (Luxury)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Service Selection -->
+                        <div class="form-section">
+                            <h3>Pilih Layanan</h3>
+                            
+                            <!-- Package Selection -->
+                            <div class="package-selection">
+                                <div class="package-option">
+                                    <input type="radio" id="silver" name="package" value="silver" checked>
+                                    <label for="silver">
+                                        <span class="package-name">Silver</span>
+                                        <span class="package-description">Paket Dasar</span>
+                                    </label>
+                                </div>
+                                <div class="package-option">
+                                    <input type="radio" id="gold" name="package" value="gold">
+                                    <label for="gold">
+                                        <span class="package-name">Gold</span>
+                                        <span class="package-description">Paket Premium</span>
+                                    </label>
+                                </div>
+                                <div class="package-option">
+                                    <input type="radio" id="platinum" name="package" value="platinum">
+                                    <label for="platinum">
+                                        <span class="package-name">Platinum</span>
+                                        <span class="package-description">Paket Ultimate</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Service Category Tabs -->
+                            <div class="service-tabs">
+                                <button class="tab-btn active" data-category="ketok">Ketok Magic</button>
+                                <button class="tab-btn" data-category="las">Las/Ketok</button>
+                                <button class="tab-btn" data-category="press">Press</button>
+                                <button class="tab-btn" data-category="cat-small">Cat Body (SMALL)</button>
+                                <button class="tab-btn" data-category="cat-large">Cat Body (LARGE)</button>
+                                <button class="tab-btn" data-category="cat-luxury">Cat Body (Luxury)</button>
+                                <button class="tab-btn" data-category="additional">Layanan Tambahan</button>
+                            </div>
+
+                            <!-- Service Lists -->
+                            <div class="service-lists">
+                                <!-- Ketok Magic Services -->
+                                <div class="service-list active" id="ketok-services">
+                                    <div class="service-card">
+                                        <div class="service-header">
+                                            <h4>Body</h4>
+                                            <label class="service-toggle">
+                                                <input type="checkbox" name="services" data-category="ketok" data-service="body">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="service-details">
+                                            <div class="price-category standard">
+                                                <span class="category-label">Standard (< 1M)</span>
+                                                <span class="price">Rp 165.000 + Rp 33.000/cm</span>
+                                            </div>
+                                            <div class="price-category luxury">
+                                                <span class="category-label">Luxury (> 1M)</span>
+                                                <span class="price">Rp 275.000 + Rp 55.000/cm</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="service-card">
+                                        <div class="service-header">
+                                            <h4>Tiang Atas dan Atap</h4>
+                                            <label class="service-toggle">
+                                                <input type="checkbox" name="services" data-category="ketok" data-service="tiang">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="service-details">
+                                            <div class="price-category standard">
+                                                <span class="category-label">Standard (< 1M)</span>
+                                                <span class="price">Rp 220.000 + Rp 33.000/cm</span>
+                                            </div>
+                                            <div class="price-category luxury">
+                                                <span class="category-label">Luxury (> 1M)</span>
+                                                <span class="price">Rp 330.000 + Rp 66.000/cm</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Las/Ketok Services -->
+                                <div class="service-list" id="las-services">
+                                    <div class="service-card">
+                                        <div class="service-header">
+                                            <h4>Body</h4>
+                                            <label class="service-toggle">
+                                                <input type="checkbox" name="services" data-category="las" data-service="body">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="service-details">
+                                            <div class="price-category standard">
+                                                <span class="category-label">Standard (< 1M)</span>
+                                                <span class="price">Rp 55.000 + Rp 16.500/cm</span>
+                                            </div>
+                                            <div class="price-category luxury">
+                                                <span class="category-label">Luxury (> 1M)</span>
+                                                <span class="price">Rp 110.000 + Rp 33.000/cm</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Add more Las/Ketok services in the same format -->
+                                </div>
+
+                                <!-- Press Services -->
+                                <div class="service-list" id="press-services">
+                                    <div class="service-card">
+                                        <div class="service-header">
+                                            <h4>Panel Kacamata</h4>
+                                            <label class="service-toggle">
+                                                <input type="checkbox" name="services" data-category="press" data-service="kacamata">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="service-details">
+                                            <div class="price-category standard">
+                                                <span class="category-label">Standard (< 1M)</span>
+                                                <span class="price">Rp 770.000</span>
+                                            </div>
+                                            <div class="price-category luxury">
+                                                <span class="category-label">Luxury (> 1M)</span>
+                                                <span class="price">Rp 1.650.000</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="service-card">
+                                        <div class="service-header">
+                                            <h4>Crossmember</h4>
+                                            <label class="service-toggle">
+                                                <input type="checkbox" name="services" data-category="press" data-service="crossmember">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="service-details">
+                                            <div class="price-category standard">
+                                                <span class="category-label">Standard (< 1M)</span>
+                                                <span class="price">Rp 660.000</span>
+                                            </div>
+                                            <div class="price-category luxury">
+                                                <span class="category-label">Luxury (> 1M)</span>
+                                                <span class="price">Rp 1.320.000</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="service-card">
+                                        <div class="service-header">
+                                            <h4>Tiang Pintu</h4>
+                                            <label class="service-toggle">
+                                                <input type="checkbox" name="services" data-category="press" data-service="tiangpintu">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="service-details">
+                                            <div class="price-category standard">
+                                                <span class="category-label">Standard (< 1M)</span>
+                                                <span class="price">Rp 1.100.000</span>
+                                            </div>
+                                            <div class="price-category luxury">
+                                                <span class="category-label">Luxury (> 1M)</span>
+                                                <span class="price">Rp 2.420.000</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="service-card">
+                                        <div class="service-header">
+                                            <h4>Apron</h4>
+                                            <label class="service-toggle">
+                                                <input type="checkbox" name="services" data-category="press" data-service="afron">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="service-details">
+                                            <div class="price-category standard">
+                                                <span class="category-label">Standard (< 1M)</span>
+                                                <span class="price">Rp 770.000</span>
+                                            </div>
+                                            <div class="price-category luxury">
+                                                <span class="category-label">Luxury (> 1M)</span>
+                                                <span class="price">Rp 1.650.000</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Additional Services -->
+                                <div class="service-list" id="additional-services">
+                                    <div class="service-card">
+                                        <div class="service-header">
+                                            <h4>Angkat Body</h4>
+                                            <label class="service-toggle">
+                                                <input type="checkbox" name="services" data-category="additional" data-service="angkatbody">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="service-details">
+                                            <div class="price-category standard">
+                                                <span class="category-label">Standard (< 1M)</span>
+                                                <span class="price">Rp 2.750.000</span>
+                                            </div>
+                                            <div class="price-category luxury">
+                                                <span class="category-label">Luxury (> 1M)</span>
+                                                <span class="price">Rp 2.750.000</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Add more Additional services in the same format -->
+                                </div>
+
+                                <!-- Cat Body (SMALL) Services -->
+                                <div class="service-list" id="cat-small-services">
+                                    <div class="service-card">
+                                        <div class="service-header">
+                                            <h4>Bumper</h4>
+                                            <label class="service-toggle">
+                                                <input type="checkbox" name="services" data-category="cat-small" data-service="bumper">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="service-details">
+                                            <div class="price-category silver">
+                                                <span class="category-label">Silver</span>
+                                                <span class="price">Rp 770.000</span>
+                                            </div>
+                                            <div class="price-category gold">
+                                                <span class="category-label">Gold</span>
+                                                <span class="price">Rp 990.000</span>
+                                            </div>
+                                            <div class="price-category platinum">
+                                                <span class="category-label">Platinum</span>
+                                                <span class="price">Rp 1.100.000</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Add all other SMALL services in the same format -->
+                                </div>
+
+                                <!-- Cat Body (LARGE) Services -->
+                                <div class="service-list" id="cat-large-services">
+                                    <div class="service-card">
+                                        <div class="service-header">
+                                            <h4>Bumper</h4>
+                                            <label class="service-toggle">
+                                                <input type="checkbox" name="services" data-category="cat-large" data-service="bumper">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="service-details">
+                                            <div class="price-category silver">
+                                                <span class="category-label">Silver</span>
+                                                <span class="price">Rp 880.000</span>
+                                            </div>
+                                            <div class="price-category gold">
+                                                <span class="category-label">Gold</span>
+                                                <span class="price">Rp 1.100.000</span>
+                                            </div>
+                                            <div class="price-category platinum">
+                                                <span class="category-label">Platinum</span>
+                                                <span class="price">Rp 1.210.000</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Add all other LARGE services in the same format -->
+                                </div>
+
+                                <!-- Cat Body (Luxury) Services -->
+                                <div class="service-list" id="cat-luxury-services">
+                                    <div class="service-card">
+                                        <div class="service-header">
+                                            <h4>Bumper</h4>
+                                            <label class="service-toggle">
+                                                <input type="checkbox" name="services" data-category="cat-luxury" data-service="bumper">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="service-details">
+                                            <div class="price-category silver">
+                                                <span class="category-label">Silver</span>
+                                                <span class="price">Rp 990.000</span>
+                                            </div>
+                                            <div class="price-category gold">
+                                                <span class="category-label">Gold</span>
+                                                <span class="price">Rp 1.430.000</span>
+                                            </div>
+                                            <div class="price-category platinum">
+                                                <span class="category-label">Platinum</span>
+                                                <span class="price">Rp 1.650.000</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Add all other Luxury services in the same format -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Schedule -->
+                        <div class="form-section">
+                            <h3>Jadwal Service</h3>
+                            <div class="form-group">
+                                <label for="serviceDate" class="form-label">Tanggal Service</label>
+                                <input type="date" id="serviceDate" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="serviceTime" class="form-label">Waktu Service</label>
+                                <select id="serviceTime" class="form-control" required>
+                                    <option value="">Pilih Waktu</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="15:00">15:00</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Additional Notes -->
+                        <div class="form-section">
+                            <h3>Catatan Tambahan</h3>
+                            <div class="form-group">
+                                <label for="notes" class="form-label">Keluhan atau Permintaan Khusus</label>
+                                <textarea id="notes" class="form-control" rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Konfirmasi Booking</button>
+                    </form>
+                </div>
+
+                <!-- Booking Summary -->
+                <div class="booking-summary">
+                    <h3 class="summary-title">Ringkasan Booking</h3>
+                    <div id="summaryContent">
+                        <div class="summary-item">
+                            <span class="summary-label">Kategori Harga</span>
+                            <span class="summary-value" id="selectedCategory">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Layanan Dipilih</span>
+                            <span class="summary-value" id="selectedServices">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Tanggal Service</span>
+                            <span class="summary-value" id="selectedDate">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Waktu Service</span>
+                            <span class="summary-value" id="selectedTime">-</span>
+                        </div>
+                        <div class="total-price">
+                            Total Estimasi: <span id="totalPrice">Rp 0</span>
+                        </div>
+                    </div>
+                    <div class="summary-note">
+                        <p><i class="fas fa-info-circle"></i> Harga dapat berubah setelah inspeksi kendaraan</p>
+                        <p><i class="fas fa-info-circle"></i> Harga Standard untuk mobil < 1M</p>
+                        <p><i class="fas fa-info-circle"></i> Harga Luxury untuk mobil > 1M</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <img src="images/logo-removebg-preview.png.png" alt="Logo Bengkel" class="footer-logo">
+                    <p>Bengkel Aseng Ketok - Solusi terpercaya untuk perawatan dan perbaikan kendaraan Anda.</p>
+                </div>
+                <div class="footer-contact">
+                    <h3>Hubungi Kami</h3>
+                    <p><i class="fas fa-phone"></i> +62 123 4567 890</p>
+                    <p><i class="fas fa-envelope"></i> info@bengkelaseng.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Contoh No. 123, Jakarta</p>
+                </div>
+                <div class="footer-hours">
+                    <h3>Jam Operasional</h3>
+                    <p>Senin - Jumat: 08:00 - 17:00</p>
+                    <p>Sabtu: 08:00 - 15:00</p>
+                    <p>Minggu: Tutup</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Ikuti Kami</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bengkel Aseng Ketok. By Marvin Berlin</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
